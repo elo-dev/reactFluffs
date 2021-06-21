@@ -1,0 +1,65 @@
+%hover{
+    &:hover{
+        color: #00C4CF;
+        transition: 0.5s all ease;
+    }
+}
+
+$main-color: #474B59;
+
+.appHeader{
+    display: flex;
+    justify-content: space-between;
+}
+
+.accountNameHeader{
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    cursor: pointer;
+    img{
+        width: 28px;
+        margin-right: 5px;
+    }
+    p{
+        color: $main-color;
+        text-transform: uppercase;
+        font-size: .75rem;
+    }
+}
+
+.titleHeader{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+        svg{
+            color: $main-color; 
+            @extend %hover
+        }
+        p{
+            padding-left: 15px;
+            font-size: 2rem;
+            color: $main-color;
+            @extend %hover
+        }
+}
+
+.notificationsHeader{
+    display: flex;
+    align-items: center;
+    svg:not(:first-of-type){
+        margin-left: 30px;
+    }
+    svg{
+        color: $main-color;
+        cursor: pointer;
+    }
+    .searchHeader{
+        width: 200px;
+        padding: 15px 25px 15px 25px;
+        border: none;
+        border-radius: 25px;
+        background-color: rgba(196, 196, 196, .2);
+        margin-right: 10px;
+    }
+}

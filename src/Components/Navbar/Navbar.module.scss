@@ -1,0 +1,26 @@
+.appNavbar{
+    display: flex;
+    justify-content: space-between;
+    div:nth-child(odd){
+        background-color: rgba(84, 86, 84, 1);
+        text-align: center;
+    }
+    div:nth-child(even){
+        background-color: rgba(84, 86, 84, .95);
+        text-align: center;
+    }
+    div{
+        width: 100%;
+        height: 150px;
+        a{
+            display: block;
+            margin-top: 30px;
+            padding: 10px 6px 10px 6px;
+            text-decoration: none;
+            color: white;
+            p{
+                font-size: 14px;
+            }
+        }
+    }
+}
