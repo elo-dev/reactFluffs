@@ -1,0 +1,42 @@
+.profileFeed{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 30px;
+    .profileFeedItem{
+        position: relative;
+        .profileFeedItem_bookmark{
+            position: absolute;
+            cursor: pointer;
+            color: white;
+            right: 15px;
+            top: 15px;
+            &:hover{
+                color: #e16a70;
+                transition: .35s ease;
+            }
+        }
+        img{
+            border-radius: 10px;
+            width: 290px;
+            height: 290px;
+            object-fit: cover;
+        }
+        span{
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: white;
+            font-weight: 400;
+            svg{
+                cursor: pointer;
+                color: white;
+                margin-right: 8px;
+                &:hover{
+                    color: #e16a70;
+                    transition: .35s ease;
+                }
+            }
+        }
+    }
+}

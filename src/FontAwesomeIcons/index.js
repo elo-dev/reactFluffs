@@ -1,5 +1,5 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faInstagram } from '@fortawesome/free-brands-svg-icons'
-import { faBell, faEnvelope, faCrosshairs, faAlignLeft, faUser, faHome } from '@fortawesome/free-solid-svg-icons'
+import { faInstagram, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { faBell, faEnvelope, faCrosshairs, faAlignLeft, faUser, faHome, faChevronRight, faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faInstagram, faBell, faEnvelope, faCrosshairs, faAlignLeft, faUser, faHome)
+library.add(faInstagram, faFacebook, faTwitter, faBell, faEnvelope, faCrosshairs, faAlignLeft, faUser, faHome, faChevronRight, faHeart, faBookmark)

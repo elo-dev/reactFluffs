@@ -1,6 +1,16 @@
+%hover{
+    &:hover{
+        color: #00C4CF;
+        transition: 0.5s all ease;
+    }
+}
+
 .appNavbar{
     display: flex;
     justify-content: space-between;
+    a{
+        @extend %hover;
+    }
     div:nth-child(odd){
         background-color: rgba(84, 86, 84, 1);
         text-align: center;

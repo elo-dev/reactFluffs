@@ -1,0 +1,93 @@
+$main-color: #474B59;
+$second-color: #848484;
+
+%hover{
+    &:hover{
+        color: #00C4CF;
+        transition: 0.5s all ease;
+    }
+}
+
+%paragraph{
+    p{
+        font-size: 16px;
+        color: $second-color;
+        margin: 0;
+        padding: 5px 0 5px 0;
+        &:last-of-type{
+            font-size: 14px;
+        }
+    }
+}
+
+%borderBlock{
+    border-top: 1px solid rgba(132, 132, 132, .15);
+    padding: 10px 0 10px 0;
+}
+
+.sideBarLeft{
+    grid-area: sbl;
+    background-color: rgba(132, 132, 132, .1);
+    padding: 30px 10px 0 10px;
+}
+
+.userInfo{
+    margin-bottom: 20px;
+}
+
+.userInfoAbout{
+    text-align: center;
+    img{
+        width: 180px;
+    }
+}
+
+.userInfoDetail{
+    span{
+        display: block;
+        margin-top: 15px;
+        color: $main-color;
+    }
+    .userInfoName{
+        font-size: 20px;
+        font-weight: 700;
+    }
+    .userInfoHashtag{
+        font-size: 14px;
+    }
+    .userInfoLinks{
+        a{
+            padding: 5px 10px;
+            color: $main-color;
+            @extend %hover;
+        }
+    }
+}
+
+.userSubscribers{
+    @extend %borderBlock;
+    li{
+        list-style: none;
+        padding: 5px 10px;
+        a{
+            text-decoration: none;
+            color: $main-color;
+            @extend %hover;
+            svg{
+                float: right;
+                vertical-align: middle;
+            }
+        }
+    }
+}
+
+.userBiography{
+    @extend %borderBlock;
+    @extend %paragraph;
+}
+
+.userWebsite{
+    border-bottom: 1px solid rgba(132, 132, 132, .15);
+    @extend %borderBlock;
+    @extend %paragraph;
+}
