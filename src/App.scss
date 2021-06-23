@@ -1,15 +1,11 @@
 .App{
-    width: 1200px;
+    width: 100%;
     margin: 0 auto;
 }
 
 .mainContentWrapper{
     display: grid;
-    grid-template-columns: 3fr 7fr 3fr;
+    grid-template-columns: 3fr 6fr 3fr;
     grid-template-areas: 
     "sbl mc sbr";
-}
-
-.mainContent{
-    grid-area: mc;
 }

@@ -1,0 +1,39 @@
+.storiesWrapper{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 40px 0;
+    .stories{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 360px;
+        height: 360px;
+        text-align: center;
+        margin: 0 15px 40px 15px;
+        cursor: pointer;
+        .storiesFrom{
+            position: absolute;
+            color: white;
+            img{
+                width: 42px;
+                height: 42px;
+                object-fit: cover;
+                border-radius: 50%;
+                border: 2px dotted #fff;
+           }
+           .storiesFromData{
+               font-size: 13px;
+               letter-spacing: .5px;
+               font-weight: 100;
+           }
+       }
+        .storiesBackground{
+            width: 100%;
+            height: 100%;
+            filter: brightness(50%);
+            border-radius: 10px;
+       }
+    }
+}

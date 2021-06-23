@@ -10,6 +10,7 @@ $main-color: #474B59;
 .appHeader{
     display: flex;
     justify-content: space-between;
+    height: 65px;
 }
 
 .accountNameHeader{
@@ -32,6 +33,7 @@ $main-color: #474B59;
     display: flex;
     align-items: center;
     cursor: pointer;
+    margin-left: 15px;
         svg{
             color: $main-color; 
             @extend %hover
@@ -47,12 +49,14 @@ $main-color: #474B59;
 .notificationsHeader{
     display: flex;
     align-items: center;
+    margin-right: 35px;
     svg:not(:first-of-type){
         margin-left: 30px;
     }
     svg{
         color: $main-color;
         cursor: pointer;
+        @extend %hover
     }
     .searchHeader{
         width: 200px;

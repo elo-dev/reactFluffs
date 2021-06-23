@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import style from './Navbar.module.scss'
 
@@ -6,34 +7,34 @@ const Navbar = () => {
     return(
         <nav className={style.appNavbar}>
             <div id={style.home}>
-                <a href="">
-                <FontAwesomeIcon icon='home' size='2x' />
-                <p>Home</p>
-                </a>
+                <NavLink to="/">
+                    <FontAwesomeIcon icon='home' size='2x' />
+                    <p>Home</p>
+                </NavLink>
             </div>
             <div id={style.explore}>
-                <a href="">
-                <FontAwesomeIcon icon='crosshairs' size='2x' />
-                <p>Explore</p>
-                </a>
+                <NavLink to="/">
+                    <FontAwesomeIcon icon='crosshairs' size='2x' />
+                    <p>Explore</p>
+                </NavLink>
             </div>
             <div id={style.upload}>
-                <a href="">
-                <FontAwesomeIcon icon={['fab', 'instagram']} size='2x' />
-                <p>Upload</p>
-                </a>
+                <NavLink to="/">
+                    <FontAwesomeIcon icon={['fab', 'instagram']} size='2x' />
+                    <p>Upload</p>
+                </NavLink>
             </div>
             <div id={style.stories}>
-                <a href="">
-                <FontAwesomeIcon icon='align-left' size='2x' />
-                <p>Stories</p>
-                </a>
+                <NavLink to="/stories">
+                    <FontAwesomeIcon icon='align-left' size='2x' />
+                    <p>Stories</p>
+                </NavLink>
             </div>
             <div id={style.profile}>
-                <a href="">
-                <FontAwesomeIcon icon='user' size='2x' />
-                <p>Profile</p>
-                </a>
+                <NavLink to="/profile">
+                    <FontAwesomeIcon icon='user' size='2x' />
+                    <p>Profile</p>
+                </NavLink>
             </div>
         </nav>
     )

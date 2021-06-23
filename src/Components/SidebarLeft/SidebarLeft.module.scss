@@ -38,7 +38,11 @@ $second-color: #848484;
 .userInfoAbout{
     text-align: center;
     img{
+        cursor: pointer;
         width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        box-shadow: 0px 5px 25px 0px rgba(0,0,0,0.2);
     }
 }
 
