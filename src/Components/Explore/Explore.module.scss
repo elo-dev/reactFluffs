@@ -1,0 +1,101 @@
+.exploreWrapper{
+    padding-top: 40px;
+    background-color: #f4f4f4;
+    .exploreTitle{
+        h4{
+            width: 45px;
+            cursor: pointer;
+            // padding: 40px 0 15px 70px;
+            font-size: 14px;
+            color: #88898a;
+            font-weight: 700;
+            margin: 0 0 15px 70px;
+            &:hover{
+                transition: .5s ease;
+                color: #00C4CF;
+            }
+        }
+    }
+    .exploreNewFriendsWrapper{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        .exploreNewFriends{
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            margin: 0 15px 30px 15px;
+            background-color: white;
+            .exploreNewFriendsImg{
+                img{
+                    width: 263px;
+                    height: 200px;
+                    object-fit: cover;
+                }
+            }
+            .exploreNewFriendsAuthor{
+                position: absolute;
+                top: 50%;
+                left: 7%;
+                img{
+                    width: 50px;
+                    height: 50px;
+                    object-fit: cover;
+                    border: 5px solid #fff;
+                }
+            }
+            .exploreNewFriendsHeader{
+                position: relative;
+                padding: 0 15px;
+                margin-top: 25px;
+                .exploreNewFriendsName{
+                    color: #88898a;
+                    font-size: 14px;
+                    font-weight: 700;
+                }
+                .exploreNewFriendsLink{
+                    font-size: 14px;
+                    color: #aaa;
+                    text-transform: lowercase;
+                }
+            }
+            .exploreNewFriendsBtn{
+                cursor: pointer;
+                width: 100%;
+                background-color: #05cb95;
+                color: white;
+                border-width: 0;
+                padding: 4px;
+                text-align: center;
+                font-size: 14px;
+                margin: 0;
+                &:hover{
+                    transition: .3s ease;
+                    background-color: #1fa881;
+                }
+            }
+        }
+    }
+
+    .exploreSectionsTitle{
+        margin: 60px 0 10px 75px;
+        h4{
+            width: 110px;
+            cursor: pointer;
+            margin: 0;
+            font-size: 14px;
+            color: #88898a;
+            font-weight: 700;
+            letter-spacing: 1px;
+            &:hover{
+                transition: .5s ease;
+                color: #00C4CF;
+            }
+        }
+    }
+    .exploreSections{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}

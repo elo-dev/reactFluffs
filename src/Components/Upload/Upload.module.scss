@@ -1,0 +1,116 @@
+@import './CSSgram-master/source/scss/cssgram.scss';
+
+%imgSetting{
+    cursor: pointer;
+    object-fit: cover;
+    width: 360px;
+    height: 254px;
+    border-radius: 4px;
+}
+
+.uploadWrapper{
+    background-color: #f4f4f4;
+    .uploadForm{
+        display: flex;
+        justify-content: center;
+        padding: 40px 0;
+        form{
+            .uploadInput{
+                width: 1100px;
+                height: 40px;
+                border-width: 0;
+                padding: 6px 12px;
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                font-size: 12px;
+            }
+            .uploadItemsWrapper{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 15px;
+                background-color: white;
+                .uploadItems{
+                    svg{
+                        cursor: pointer;
+                        color: rgba(132, 132, 132, 1);
+                        margin-right: 10px;
+                        padding: 7px;
+                        transition: .5s ease;
+                        &:hover{
+                            border-radius: 2px;
+                            background-color: rgba(132, 132, 132, 0.2);
+                        }
+                    }
+                }
+                .uploadBtn{
+                    color: white;
+                    font-size: 14px;
+                    background-color: #05cb95;
+                    cursor: pointer;
+                    border: 1px solid transparent;
+                    border-radius: 4px;
+                    padding: 5px;
+                    transition: 0.3s ease;
+                    &:hover{
+                        background-color: #1fa881;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.uploadFilterTitle{
+    margin-bottom: 40px;
+    h4{
+        text-align: center;
+        letter-spacing: 1px;
+        color: #88898a;
+        font-size: 14px;
+    }
+}
+
+.uploadFilterWrapper{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    .uploadFilter{
+        padding: 0 15px 30px 15px;
+        .uploadFilterImg{
+            height: 254px;
+            .uploadFilterNormal{
+                @extend %imgSetting;
+            }
+            .uploadFilter1977{
+                @extend %imgSetting;
+                &:hover{
+                    @extend %_1977;
+                }
+            }
+            .uploadFilterWillow{
+                @extend %imgSetting;
+                &:hover{
+                    @extend %willow;
+                }
+            }
+            .uploadFilterBrannan{
+                @extend %imgSetting;
+                &:hover{
+                    @extend %brannan;
+                }
+            }
+        }
+        .uploadFilterHeader{
+            border-left: 2px solid rgba(84, 86, 84, .35);
+            border-right: 2px solid rgba(84, 86, 84, .35);
+            border-bottom: 2px solid rgba(84, 86, 84, .35);
+            padding: 10px;
+            p{
+                margin: 0;
+                font-size: 16px;
+                color: #88898a;
+                text-align: center;
+            }
+        }
+    }
+}

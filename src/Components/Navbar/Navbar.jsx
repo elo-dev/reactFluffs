@@ -7,19 +7,19 @@ const Navbar = () => {
     return(
         <nav className={style.appNavbar}>
             <div id={style.home}>
-                <NavLink to="/">
+                <NavLink to="/home">
                     <FontAwesomeIcon icon='home' size='2x' />
                     <p>Home</p>
                 </NavLink>
             </div>
             <div id={style.explore}>
-                <NavLink to="/">
+                <NavLink to="/explore">
                     <FontAwesomeIcon icon='crosshairs' size='2x' />
                     <p>Explore</p>
                 </NavLink>
             </div>
             <div id={style.upload}>
-                <NavLink to="/">
+                <NavLink to="/upload">
                     <FontAwesomeIcon icon={['fab', 'instagram']} size='2x' />
                     <p>Upload</p>
                 </NavLink>
