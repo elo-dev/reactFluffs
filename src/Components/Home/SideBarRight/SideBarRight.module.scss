@@ -1,0 +1,79 @@
+$main-color: #474B59;
+$second-color: rgba(132, 132, 132, .5);
+
+%hover{
+    &:hover{
+        color: #00C4CF;
+        transition: 0.5s all ease;
+    }
+}
+
+.sideBarRightWrapper{
+    margin-left: 20px;
+    .friendsWrapper{
+        background-color: white;
+        margin: 0 15px 20px 0;
+        padding: 0 0px 15px 0px;
+        box-shadow: 0 5px 25px 0 rgba(123,123,123,.15);
+        .friends{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px;
+            img{
+                width: 28px;
+                height: 28px;
+                object-fit: cover;
+                border-radius: 50%;
+                border: 2px solid #f4f4f4;
+                padding: 2px;
+            }
+            .friendsName{
+                margin: 0;
+                margin-bottom: 5px;
+                color: $main-color;
+            }
+            .friendsProfileLink{
+                color: $second-color;
+                font-size: 14px;
+                text-transform: lowercase;
+            }
+            svg{
+                border: 1px solid $second-color;
+                padding: 5px;
+                color: $second-color;
+                cursor: pointer;
+                @extend %hover;
+            }
+        }
+    }
+    
+    .trendingPhoto{
+        margin: 0 15px 0 0;
+        h4{
+            font-weight: 100;
+            font-size: 12px;
+            color: $second-color;
+            border: 1px solid $second-color;
+            padding: 15px 20px 15px 20px;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        .photoWrapper{
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid $second-color;
+            justify-content: center;
+            padding: 10px 0px 10px 0px;
+            .photo{
+                img{
+                    cursor: pointer;
+                    width: 131px;
+                    height: 92px;
+                    object-fit: cover;
+                    margin: 2px 4px;
+                }
+            }
+        }
+    }
+}

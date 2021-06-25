@@ -1,0 +1,20 @@
+.homeWrapper{
+    display: grid;
+    grid-template-columns: 3fr 6fr 3fr;
+    grid-template-areas: 
+    "sbl hc sbr";
+    padding: 40px 0;
+    background-color: #f4f4f4;
+
+    .sideBarLeft{
+        grid-area: sbl;
+    }
+
+    .homeContent{
+        grid-area: hc;
+    }
+
+    .sideBarRight{
+        grid-area: sbr;
+    }
+}

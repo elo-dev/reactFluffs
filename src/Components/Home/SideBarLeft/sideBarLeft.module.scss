@@ -1,0 +1,32 @@
+.homeItems{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 290px;
+    height: 200px;
+    text-align: center;
+    margin: 0 15px 20px 15px;
+    cursor: pointer;
+    .homeItemFrom{
+        position: absolute;
+        color: white;
+        img{
+            width: 42px;
+            height: 42px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px dotted #fff;
+        }
+        .homeItemFromData{
+            font-size: 13px;
+            letter-spacing: .5px;
+            font-weight: 100;
+        }
+    }
+    .homeItemBackground{
+        width: 100%;
+        height: 100%;
+        filter: brightness(50%);
+    }
+}
