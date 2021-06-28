@@ -2,7 +2,7 @@ import React from 'react'
 import style from './Profile.module.scss'
 import ProfileFeedItem from './ProfileFeedItem/ProfileFeedItem'
 
-const ProfileContent = () => {
+const ProfileContent = (props) => {
     return(
         <section className={style.profileContent}>
             <div className={style.profileFeed}>

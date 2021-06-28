@@ -1,51 +1,17 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import style from './SidebarRight.module.scss'
+import SideBarRightFriends from './SidebarRightFriends/SidebarRightFriends'
 
-const SidebarRight = () => {
+const SidebarRight = (props) => {
+
+    let state = props.profileSideBarRight
+
+    let friendsElement = state.friends.map(f => <SideBarRightFriends key={f.id} id={f.id} name={f.name} photo={f.photo} link={f.link} />)
+
     return(
         <section className={style.sideBarRight}>
             <div className={style.friendsWrapper}>
-                <div className={style.friends}>
-                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" />
-                    <div className={style.friendsNameWrapper}>
-                        <p className={style.friendsName}>Name SecondName</p>
-                        <span className={style.friendsProfileLink}>@profileLink</span>
-                    </div>
-                    <FontAwesomeIcon icon='plus' />
-                </div>
-                <div className={style.friends}>
-                    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" />
-                    <div className={style.friendsNameWrapper}>
-                        <p className={style.friendsName}>Name SecondName</p>
-                        <span className={style.friendsProfileLink}>@profileLink</span>
-                    </div>
-                    <FontAwesomeIcon icon='plus' />
-                </div>
-                <div className={style.friends}>
-                    <img src="https://images.pexels.com/photos/839586/pexels-photo-839586.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" />
-                    <div className={style.friendsNameWrapper}>
-                        <p className={style.friendsName}>Name SecondName</p>
-                        <span className={style.friendsProfileLink}>@profileLink</span>
-                    </div>
-                    <FontAwesomeIcon icon='plus' />
-                </div>
-                <div className={style.friends}>
-                    <img src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" />
-                    <div className={style.friendsNameWrapper}>
-                        <p className={style.friendsName}>Name SecondName</p>
-                        <span className={style.friendsProfileLink}>@profileLink</span>
-                    </div>
-                    <FontAwesomeIcon icon='plus' />
-                </div>
-                <div className={style.friends}>
-                    <img src="https://images.pexels.com/photos/1082962/pexels-photo-1082962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" />
-                    <div className={style.friendsNameWrapper}>
-                        <p className={style.friendsName}>Name SecondName</p>
-                        <span className={style.friendsProfileLink}>@profileLink</span>
-                    </div>
-                    <FontAwesomeIcon icon='plus' />
-                </div>
+                {friendsElement}
             </div>
 
             <div className={style.trendingPhoto}>
