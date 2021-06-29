@@ -2,7 +2,7 @@ import React from 'react'
 import style from './Home.module.scss'
 import HomeContent from './HomeContent/HomeContent'
 import SideBarLeft from './SideBarLeft/sideBarLeft'
-import SideBarRight from './SideBarRight/SideBarRight'
+import SideBarRightContainer from './SideBarRight/SideBarRightContainer'
 
 const Home = () => {
     return(
@@ -16,7 +16,7 @@ const Home = () => {
                 <HomeContent />
             </div>
             <div className={style.sideBarRight}>
-                <SideBarRight />
+                <SideBarRightContainer />
             </div>
         </section>
     )

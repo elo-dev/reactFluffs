@@ -11,6 +11,9 @@
     a{
         @extend %hover;
     }
+    .tabActive{
+        color: #00C4CF !important;
+    }
     div:nth-child(odd){
         background-color: rgba(84, 86, 84, 1);
         text-align: center;

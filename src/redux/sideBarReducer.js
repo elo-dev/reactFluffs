@@ -1,3 +1,6 @@
+const FOLLOW = 'FOLLOW'
+const UNFOLLOW = 'UNFOLLOW'
+
 let initialState = {
     friends:[
         {id: 1,
@@ -29,7 +32,45 @@ let initialState = {
 }
 
 const sideBarReducer = (state = initialState, action) => {
-    return state
+    
+    switch(action.type){
+        case FOLLOW:
+            return{
+                ...state,
+                friends: state.friends.map(f => {
+                    if(f.id === action.userId){
+                        return {...f, followed: true}
+                    }
+                    return f
+                })
+            }
+        case UNFOLLOW:
+            return{
+                ...state,
+                friends: state.friends.map(f => {
+                    if(f.id === action.userId){
+                        return {...f, followed: false}
+                    }
+                    return f
+                })
+            }
+        default: 
+            return state
+    }
+}
+
+export const followActionCreator = (userId) => {
+    return {
+        type: FOLLOW,
+        userId
+    }
+}
+
+export const unfollowActionCreator = (userId) => {
+    return {
+        type: UNFOLLOW,
+        userId
+    }
 }
 
 export default sideBarReducer
