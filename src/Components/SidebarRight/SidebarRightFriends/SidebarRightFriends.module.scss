@@ -8,6 +8,14 @@ $second-color: rgba(132, 132, 132, .5);
     }
 }
 
+%button{
+    border: 1px solid $second-color;
+    padding: 5px;
+    color: $second-color;
+    cursor: pointer;
+    @extend %hover;
+}
+
 .friends{
     display: flex;
     align-items: center;
@@ -38,14 +46,16 @@ $second-color: rgba(132, 132, 132, .5);
             text-transform: lowercase;
         }
     }
-    svg{
-        border: 1px solid $second-color;
-        padding: 5px;
-        color: $second-color;
-        cursor: pointer;
-        @extend %hover;
+    .deleteFriend{
+        @extend %button;
+        color: rgb(255, 123, 123);
+        &:hover{
+            color: rgb(253, 56, 56);
+            transition: 0.5s all ease;
+        }
     }
-    .addFriendsBtn{
-        color: green !important;
+    .addFriend{
+        @extend %button;
+        @extend %hover;
     }
 }

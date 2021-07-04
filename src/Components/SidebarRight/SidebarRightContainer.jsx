@@ -4,7 +4,7 @@ import SideBarRight from './SidebarRight'
 
 let mapStateToProps = (state) => {
     return {
-        profileSideBarRight: state.profileSideBar
+
     }
 }
 

@@ -1,17 +1,13 @@
 import React from 'react'
 import style from './SidebarRight.module.scss'
-import SideBarRightFriends from './SidebarRightFriends/SidebarRightFriends'
+import SideBarRightFriendsContainer from '../SidebarRight/SidebarRightFriends/SidebarRightFriendsContainer'
 
 const SidebarRight = (props) => {
-
-    let state = props.profileSideBarRight
-
-    let friendsElement = state.friends.map(f => <SideBarRightFriends key={f.id} id={f.id} name={f.name} photo={f.photo} link={f.link} />)
 
     return(
         <section className={style.sideBarRight}>
             <div className={style.friendsWrapper}>
-                {friendsElement}
+                <SideBarRightFriendsContainer />
             </div>
 
             <div className={style.trendingPhoto}>
