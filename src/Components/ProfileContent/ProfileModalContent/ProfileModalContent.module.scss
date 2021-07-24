@@ -107,7 +107,16 @@
                         border-radius: 50%;
                     }
                 }
-                input{
+                .inputDirty{
+                    width: 100%;
+                    border: 1px solid #05cb95;
+                    height: 30px;
+                    padding: 2px 10px;
+                    font-size: 12px;
+                    line-height: 1.5;
+                    border-radius: 3px;
+                }
+                .inputNotDirty{
                     width: 100%;
                     border: 1px solid #ccc;
                     height: 30px;

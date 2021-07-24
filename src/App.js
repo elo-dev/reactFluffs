@@ -5,7 +5,7 @@ import Header from './Components/Header/Header'
 import Navbar from './Components/Navbar/Navbar'
 import ProfileContent from './Components/ProfileContent/ProfileContent'
 import Stories from './Components/Stories/Stories'
-import Upload from './Components/Upload/Upload'
+import UploadContainer from './Components/Upload/UploadContainer'
 import Explore from './Components/Explore/Explore'
 import Home from './Components/Home/Home'
 import { Route } from 'react-router'
@@ -19,7 +19,7 @@ const App = () => {
       <Navbar />
       <Route path='/profile' render={() => <ProfileContent />} />
       <Route path='/stories' render={() => <Stories />} />
-      <Route path='/upload'  render={() => <Upload />} />
+      <Route path='/upload'  render={() => <UploadContainer />} />
       <Route path='/explore' render={() => <Explore />} />
       <Route path='/home'    render={() => <Home />} />
     </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import style from './Profile.module.scss'
-import ProfileFeedItem from './ProfileFeedItem/ProfileFeedItem'
+import ProfileFeedItemContainer from './ProfileFeedItem/ProfileFeedItemContainer'
 import Modal from '../../Modal/Modal'
 import ProfileModalContentContainer from '../ProfileModalContent/ProfileModalContentContainer'
 
@@ -9,10 +9,7 @@ const ProfileContent = (props) => {
     return(
         <section className={style.profileContent}>
             <div className={style.profileFeed}>
-                <ProfileFeedItem onClick={() => setModalActive(true)} />
-                <ProfileFeedItem/>
-                <ProfileFeedItem/>
-                <ProfileFeedItem/>
+                <ProfileFeedItemContainer onClick={() => setModalActive(true)} />
                 <Modal active={modalActive} setActive={setModalActive}>
                     <ProfileModalContentContainer />
                 </Modal>

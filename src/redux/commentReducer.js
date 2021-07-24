@@ -8,7 +8,8 @@ let initialState = {
         {id: 3, name: 'Andrey', comment: 'Its work'},
         {id: 4, name: 'Liza', comment: 'Bye'}
     ],
-    newCommentText: ''
+    newCommentText: '',
+    dirty: false
 }
 
 const commentReducer = (state = initialState, action) => {
@@ -17,13 +18,14 @@ const commentReducer = (state = initialState, action) => {
             let newComment = {
                 id: 5,
                 data: new Date().toLocaleString(),
-                comment: state.newCommentText
+                comment: state.newCommentText,
             }
             if(state.newCommentText.length > 0){
                 return{
                     ...state,
                     newCommentText: '',
-                    comments: [...state.comments, newComment]
+                    comments: [...state.comments, newComment],
+                    dirty: false
                 }
             }else{
                 return{
@@ -31,9 +33,12 @@ const commentReducer = (state = initialState, action) => {
                 }
             }
         case CHANGE_NEW_COMMENT_TEXT:
-            return{
-                ...state,
-                newCommentText: action.newComment
+            if(state.newCommentText.length >= 0){
+                return{
+                    ...state,
+                    newCommentText: action.newComment,
+                    dirty: true,
+                }
             }
         default:
             return state

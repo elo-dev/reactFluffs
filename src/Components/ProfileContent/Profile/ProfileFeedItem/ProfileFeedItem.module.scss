@@ -1,39 +1,147 @@
-.profileFeedItem{
-    position: relative;
-    margin-bottom: 30px;
-    .profileFeedItem_bookmark{
-        position: absolute;
-        cursor: pointer;
-        color: white;
-        right: 15px;
-        top: 15px;
-        &:hover{
-            color: #e16a70;
-            transition: .35s ease;
+.profileFeedItemWrapper{
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 30px;
+    .pageCount{
+        width: 560px;
+        height: 35px;
+        border: 1px solid #C1C1C1;
+        overflow: auto;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        span{
+            margin-left: 10px;
+            cursor: pointer;
+            padding: 3px;
+            &:hover{
+                background-color: #00C4CF;
+            }
+        }
+        .selectedPage{
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 18px;
         }
     }
-    img{
-        cursor: pointer;
-        border-radius: 10px;
-        width: 290px;
-        height: 290px;
-        object-fit: cover;
-        box-shadow: 0 5px 25px 0 rgba(123,123,123,.2);
-    }
-    span{
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        color: white;
-        font-weight: 400;
-        svg{
-            cursor: pointer;
-            color: white;
-            margin-right: 8px;
-            &:hover{
+    .itemWrapper{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        .profileFeedItem{
+            position: relative;
+            margin-bottom: 30px;
+            .like{
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                cursor: pointer;
                 color: #e16a70;
-                transition: .35s ease;
+                font-weight: 400;
+                margin-right: 8px;
+                &:hover{
+                    color: #00000071;
+                    transition: .35s ease;
+                }
+            }
+            .notLike{
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                cursor: pointer;
+                color: #00000071;
+                font-weight: 400;
+                margin-right: 8px;
+                &:hover{
+                    color: #e16a70;
+                    transition: .35s ease;
+                }
+            }
+            .bookmark{
+                position: absolute;
+                cursor: pointer;
+                color: #00C4CF;
+                right: 15px;
+                top: 15px;
+                &:hover{
+                    color: #00000071;
+                    transition: .35s ease;
+                }
+            }
+            .unBookmark{
+                position: absolute;
+                cursor: pointer;
+                color: #00000071;
+                right: 15px;
+                top: 15px;
+                &:hover{
+                    color: #00C4CF;
+                    transition: .35s ease;
+                }
+            }
+            img{
+                cursor: pointer;
+                border-radius: 10px;
+                width: 290px;
+                height: 290px;
+                object-fit: cover;
+                box-shadow: 0 5px 25px 0 rgba(123,123,123,.2);
             }
         }
     }
 }
+
+// .usersSection{
+//     margin: 0 auto;
+//     width: 880px;
+// }
+
+// .usersWrapper{
+//     display: flex;
+//     margin-top: 20px;
+//     align-items: center;
+// }
+
+// .usersFollow img{
+//     width: 60px;
+// }
+
+// .usersFollow button{
+//     display: block;
+//     margin: 0 auto;
+// }
+
+// .usersInfo{
+//     display: flex;
+//     justify-content: space-between;
+//     width: 450px;
+//     border: 1px solid black;
+//     border-radius: 5px;
+//     padding: 10px 15px 10px 15px;
+//     margin-left: 20px;
+// }
+
+// .usersLocation p:first-of-type{
+//     padding-bottom: 20px;
+// }
+
+// .usersName p:first-of-type{
+//     padding-bottom: 20px;
+// }
+
+// .pageCount{
+//     width: 560px;
+//     height: 35px;
+//     border: 1px solid #C1C1C1;
+//     overflow: auto;
+// }
+
+// .pageCount span{
+//     padding-left: 10px;
+//     cursor: pointer;
+// }
+
+// .selectedPage{
+//     font-weight: bold;
+//     cursor: pointer;
+//     font-size: 18px;
+// }

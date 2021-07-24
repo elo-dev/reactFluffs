@@ -25,7 +25,7 @@ const ProfileModalContent = (props) => {
             <div className={style.modalBodyLeftSide}>
                 <img src="https://images.pexels.com/photos/5913194/pexels-photo-5913194.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" />
                 <div className={style.modalBodyLeftSideComment}>
-                    <p>Comment by Author</p>
+                {props.upload.post.map(p => <p>{p.postText}</p>)}
                 </div>
             </div>
             <div className={style.modalBodyRightSide}>
@@ -57,7 +57,10 @@ const ProfileModalContent = (props) => {
                         <span className={style.avatarComment}>
                             <img src="https://images.pexels.com/photos/7120688/pexels-photo-7120688.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" />
                         </span>
-                        <input type="text" placeholder="Write your comment..." onChange={onChangeComment} onKeyPress={addComment} value={props.modalComments.newCommentText} />
+                        {state.dirty
+                        ? <input className={style.inputDirty} type="text" placeholder="Write your comment..." onChange={onChangeComment} onKeyPress={addComment} value={props.modalComments.newCommentText} />
+                        : <input className={style.inputNotDirty} type="text" placeholder="Write your comment..." onChange={onChangeComment} onKeyPress={addComment} value={props.modalComments.newCommentText} />
+                        }
                     </div>
                 </div>
             </div>

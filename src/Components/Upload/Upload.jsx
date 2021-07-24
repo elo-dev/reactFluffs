@@ -2,18 +2,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import style from './Upload.module.scss'
 
-const Upload = () => {
+const Upload = (props) => {
+
+    let addPost = (e) => {
+        e.preventDefault()
+        props.addPost()
+    }
+
+    let onChangePostText = (e) => {
+        let textPost = e.target.value
+        props.onChangePostText(textPost)
+    }
+
     return(
         <section className={style.uploadWrapper}>
             <div className={style.uploadForm}>
                 <form action="">
-                    <textarea className={style.uploadInput} placeholder="Type something..." name="" id="" cols="30" rows="3"></textarea>
+                    <textarea className={style.uploadInput} placeholder="Type something..." name="" id="" cols="30" rows="3" onChange={onChangePostText} value={props.upload.newPostText} ></textarea>
                     <div className={style.uploadItemsWrapper}>
                         <div className={style.uploadItems}>
                             <FontAwesomeIcon icon='camera' />
                             <FontAwesomeIcon icon='video' />
                         </div>
-                        <button className={style.uploadBtn}>Upload</button>
+                        <button className={style.uploadBtn} onClick={addPost} >Upload</button>
                     </div>
                 </form>
             </div>
