@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import style from './SidebarRightFriends.module.scss'
 import userPhoto from '../../../assets/images/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
 import { NavLink } from 'react-router-dom'
+import axios from 'axios'
 
 let SideBarRightFriends = (props) => {
 
@@ -29,8 +30,30 @@ let SideBarRightFriends = (props) => {
                     <span className={style.friendsProfileLink}>@link</span>
                 </div>
                 {f.followed
-                ? <FontAwesomeIcon icon='minus' className={style.deleteFriend} onClick={() => props.unfollow(f.id)} />
-                : <FontAwesomeIcon icon='plus' className={style.addFriend} onClick={() => props.follow(f.id)} />
+                ? <FontAwesomeIcon icon='minus' className={style.deleteFriend} onClick={() => {
+                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${f.id}`,{
+                        withCredentials: true,
+                        headers:{
+                            "API-KEY": "0e5c0981-d3a9-4812-a1cb-d8d1f4461a03"
+                        }
+                    }).then(response => {
+                        if(response.data.resultCode === 0){
+                            props.unfollow(f.id)
+                        }
+                    })
+                }} />
+                : <FontAwesomeIcon icon='plus' className={style.addFriend} onClick={() => {
+                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${f.id}`,{} ,{
+                        withCredentials: true,
+                        headers:{
+                            "API-KEY": "0e5c0981-d3a9-4812-a1cb-d8d1f4461a03"
+                        }
+                    }).then(response => {
+                        if(response.data.resultCode === 0){
+                            props.follow(f.id)
+                        }
+                    })
+                }} />
                 }
             </div>)}
         </div>
