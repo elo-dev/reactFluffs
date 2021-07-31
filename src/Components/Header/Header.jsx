@@ -1,8 +1,9 @@
 import React from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import style from './Header.module.scss'
+import { NavLink } from 'react-router-dom'
 
-const Header = () => {
+const Header = (props) => {
     return(
         <header className={style.appHeader}>
             <div className={style.titleHeader}>
@@ -13,10 +14,13 @@ const Header = () => {
                 <input className={style.searchHeader} type="text" placeholder='Search here' />
                 <FontAwesomeIcon icon='bell' size='lg' />
                 <FontAwesomeIcon icon='envelope' size='lg' />
-                <span className={style.accountNameHeader}>
+                {props.isAuth
+                ? <span className={style.accountNameHeader}>
                     <img src="https://image.flaticon.com/icons/png/512/147/147144.png" alt="" />
-                    <p>name secondName</p>
+                    <p>{props.login}</p>
                 </span>
+                : <NavLink to={'/login'}>Войти</NavLink>
+                }
             </div>
         </header>
     )

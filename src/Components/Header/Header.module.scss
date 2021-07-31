@@ -66,4 +66,17 @@ $main-color: #474B59;
         background-color: rgba(196, 196, 196, .2);
         margin-right: 10px;
     }
+    a{
+        text-decoration: none;
+        color: black;
+        margin-left: 20px;
+        border: 1px solid #00C4CF;
+        padding: 8px 10px;
+        border-radius: 4px;
+        &:hover{
+            transition: 0.5s all ease;
+            border-color: rgba(0, 0, 0, 0.418);
+            color: #00C4CF;
+        }
+    }
 }

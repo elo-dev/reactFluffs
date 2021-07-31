@@ -1,7 +1,7 @@
 import React from 'react'
 import './FontAwesomeIcons'
 import './App.scss'
-import Header from './Components/Header/Header'
+import HeaderContainer from './Components/Header/HeaderContainer'
 import Navbar from './Components/Navbar/Navbar'
 import ProfileContent from './Components/ProfileContent/ProfileContent'
 import Stories from './Components/Stories/Stories'
@@ -15,7 +15,7 @@ const App = () => {
   return (
     <BrowserRouter>
     <div className="App">
-      <Header />
+      <HeaderContainer />
       <Navbar />
       <Route path='/profile/:userId?' render={() => <ProfileContent />} />
       <Route path='/stories' render={() => <Stories />} />

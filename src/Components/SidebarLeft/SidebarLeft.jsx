@@ -8,13 +8,18 @@ const SidebarLeft = (props) => {
     if(!props.profile){
         return <Preloader />
     }
+
+    let socials = []
+
+    Object.values(props.profile.contacts).map(s => s !== null ? socials.push(s) : null)
+
     return(
         <section className={style.sideBarLeft}>
             <div className={style.userInfo}>
                 <div className={style.userInfoAbout}>
                     <img src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto} alt="" />
                     <div className={style.userInfoDetail}>
-                        <span className={style.userInfoName}>Name secondName</span>
+                        <span className={style.userInfoName}>{props.profile.fullName}</span>
                         <span className={style.userInfoHashtag}>@Hashtag</span>
                         <span className={style.userInfoLinks}>
                             <a href=""><FontAwesomeIcon icon={['fab', 'facebook']} /></a>
@@ -37,7 +42,9 @@ const SidebarLeft = (props) => {
             </div>
             <div className={style.userWebsite}>
                 <p>Website:</p>
-                <p>http://www.themashabrand.com</p>
+                {socials.map(s =>
+                <a href={'https://' + s}>{s}</a>
+                )}
             </div>
         </section>
     )
