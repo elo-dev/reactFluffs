@@ -1,13 +1,18 @@
 import React from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import style from './SidebarLeft.module.scss'
+import Preloader from '../common/Preloader/Preloader'
+import userPhoto from '../../assets/images/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
 
-const SidebarLeft = () => {
+const SidebarLeft = (props) => {
+    if(!props.profile){
+        return <Preloader />
+    }
     return(
         <section className={style.sideBarLeft}>
             <div className={style.userInfo}>
                 <div className={style.userInfoAbout}>
-                    <img src="https://image.flaticon.com/icons/png/512/194/194938.png" alt="" />
+                    <img src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto} alt="" />
                     <div className={style.userInfoDetail}>
                         <span className={style.userInfoName}>Name secondName</span>
                         <span className={style.userInfoHashtag}>@Hashtag</span>

@@ -1,5 +1,5 @@
 import React from 'react'
-import SidebarLeft from '../SidebarLeft/SidebarLeft'
+import SidebarLeftContainer from '../SidebarLeft/SidebarLeftContainer'
 import SidebarRightContainer from '../SidebarRight/SidebarRightContainer'
 import Profile from './Profile/Profile'
 import style from './ProfileContent.module.scss'
@@ -7,7 +7,7 @@ import style from './ProfileContent.module.scss'
 const ProfileContent = (props) => {
     return(
         <div className={style.profileWrapper}>
-            <SidebarLeft />
+            <SidebarLeftContainer />
             <section className={style.mainContent}>
                 <Profile />
             </section>

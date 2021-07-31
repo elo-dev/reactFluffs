@@ -17,7 +17,7 @@ const App = () => {
     <div className="App">
       <Header />
       <Navbar />
-      <Route path='/profile' render={() => <ProfileContent />} />
+      <Route path='/profile/:userId?' render={() => <ProfileContent />} />
       <Route path='/stories' render={() => <Stories />} />
       <Route path='/upload'  render={() => <UploadContainer />} />
       <Route path='/explore' render={() => <Explore />} />

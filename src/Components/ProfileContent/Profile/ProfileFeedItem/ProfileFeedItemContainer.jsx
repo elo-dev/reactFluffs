@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { setCurrentPageActionCreator, setUsersActionCreator, setTotalUsersCountActionCreator, likeActionCreator, unLikeActionCreator, bookmarkActionCreator, unBookmarkActionCreator, toggleIsFetching } from '../../../../redux/profileItemsReducer'
+import { setCurrentPage, setUsers, setTotalUsersCount, like, unLike, bookmark, unBookmark, toggleIsFetching } from '../../../../redux/profileItemsReducer'
 import ProfileFeedItem from './ProfileFeedItem'
 import Preloader from '../../../common/Preloader/Preloader'
 
@@ -34,7 +34,12 @@ class ProfileFeedItemContainer extends React.Component{
                              totalUsersCount={this.props.totalUsersCount}
                              currentPage={this.props.currentPage}
                              onPageChanged={this.onPageChanged}
-                             toggleModal={this.props.onClick} />
+                             toggleModal={this.props.onClick}
+                             like={this.props.like}
+                             unLike={this.props.unLike}
+                             bookmark={this.props.bookmark}
+                             unBookmark={this.props.unBookmark}
+                             />
             </>
         )
     }
@@ -50,33 +55,5 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        like: (userId) => {
-            dispatch(likeActionCreator(userId))
-        },
-        unLike: (userId) => {
-            dispatch(unLikeActionCreator(userId))
-        },
-        bookmark: (userId) => {
-            dispatch(bookmarkActionCreator(userId))
-        },
-        unBookmark: (userId) => {
-            dispatch(unBookmarkActionCreator(userId))
-        },
-        setUsers: (users) => {
-            dispatch(setUsersActionCreator(users))
-        },
-        setCurrentPage: (pageNumber) => {
-            dispatch(setCurrentPageActionCreator(pageNumber))
-        },
-        setTotalUsersCount: (totalCount) => {
-            dispatch(setTotalUsersCountActionCreator(totalCount))
-        },
-        toggleIsFetching: (isFetching) => {
-            dispatch(toggleIsFetching(isFetching))
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileFeedItemContainer)
+export default connect(mapStateToProps, 
+    {like, unLike, bookmark, unBookmark, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(ProfileFeedItemContainer)

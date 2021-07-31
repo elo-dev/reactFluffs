@@ -5,7 +5,7 @@ import ProfileModalContent from './ProfileModalContent'
 let mapStateToProps = (state) => {
     return{
         modalComments: state.modalComments,
-        upload: state.upload
+        upload: state.upload,
     }
 }
 
