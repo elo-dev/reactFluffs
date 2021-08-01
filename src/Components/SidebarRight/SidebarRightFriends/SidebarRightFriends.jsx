@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import style from './SidebarRightFriends.module.scss'
 import userPhoto from '../../../assets/images/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
 import { NavLink } from 'react-router-dom'
-import axios from 'axios'
+import { usersAPI } from '../../../api/api'
 
 let SideBarRightFriends = (props) => {
 
@@ -31,30 +31,20 @@ let SideBarRightFriends = (props) => {
                 </div>
                 {f.followed
                 ? <FontAwesomeIcon icon='minus' className={style.deleteFriend} onClick={() => {
-                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${f.id}`,{
-                        withCredentials: true,
-                        headers:{
-                            "API-KEY": "0e5c0981-d3a9-4812-a1cb-d8d1f4461a03"
-                        }
-                    }).then(response => {
-                        if(response.data.resultCode === 0){
+                    usersAPI.unfollow(f.id).then(data => {
+                        if(data.resultCode === 0){
                             props.unfollow(f.id)
                         }
                     })
                 }} />
                 : <FontAwesomeIcon icon='plus' className={style.addFriend} onClick={() => {
-                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${f.id}`,{} ,{
-                        withCredentials: true,
-                        headers:{
-                            "API-KEY": "0e5c0981-d3a9-4812-a1cb-d8d1f4461a03"
-                        }
-                    }).then(response => {
-                        if(response.data.resultCode === 0){
+                    usersAPI.follow(f.id).then(data => {
+                        if(data.resultCode === 0){
                             props.follow(f.id)
                         }
                     })
                 }} />
-                }
+            }
             </div>)}
         </div>
     )
