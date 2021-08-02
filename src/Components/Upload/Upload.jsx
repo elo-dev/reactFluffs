@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 import style from './Upload.module.scss'
 
 const Upload = (props) => {
@@ -13,6 +14,8 @@ const Upload = (props) => {
         let textPost = e.target.value
         props.onChangePostText(textPost)
     }
+
+    if(!props.isAuth) return <Redirect to={'/login'} />
 
     return(
         <section className={style.uploadWrapper}>

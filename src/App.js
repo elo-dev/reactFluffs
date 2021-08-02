@@ -8,6 +8,7 @@ import Stories from './Components/Stories/Stories'
 import UploadContainer from './Components/Upload/UploadContainer'
 import Explore from './Components/Explore/Explore'
 import Home from './Components/Home/Home'
+import LoginPage from './Components/Login/Login'
 import { Route } from 'react-router'
 import { BrowserRouter } from 'react-router-dom'
 
@@ -22,6 +23,7 @@ const App = () => {
       <Route path='/upload'  render={() => <UploadContainer />} />
       <Route path='/explore' render={() => <Explore />} />
       <Route path='/home'    render={() => <Home />} />
+      <Route path='/login'   render={() => <LoginPage />} />
     </div>
     </BrowserRouter>
   );

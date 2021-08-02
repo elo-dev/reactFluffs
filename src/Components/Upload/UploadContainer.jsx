@@ -4,7 +4,8 @@ import Upload from "./Upload";
 
 let mapStateToProps = (state) => {
     return{
-        upload: state.upload
+        upload: state.upload,
+        isAuth: state.auth.isAuth
     }
 } 
 
