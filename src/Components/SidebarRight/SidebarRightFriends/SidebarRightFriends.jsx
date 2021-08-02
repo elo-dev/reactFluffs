@@ -30,20 +30,24 @@ let SideBarRightFriends = (props) => {
                     <span className={style.friendsProfileLink}>@link</span>
                 </div>
                 {f.followed
-                ? <FontAwesomeIcon icon='minus' className={style.deleteFriend} onClick={() => {
-                    usersAPI.unfollow(f.id).then(data => {
+                ? <button disabled={props.isFollowing.some(id => id === f.id)} onClick={() => {
+                    props.toggleIsFollowing(true, f.id)
+                        usersAPI.unfollow(f.id).then(data => {
                         if(data.resultCode === 0){
                             props.unfollow(f.id)
-                        }
-                    })
-                }} />
-                : <FontAwesomeIcon icon='plus' className={style.addFriend} onClick={() => {
-                    usersAPI.follow(f.id).then(data => {
+                            }
+                        props.toggleIsFollowing(false, f.id)
+                        })
+                }}>unfollow</button>
+                : <button disabled={props.isFollowing.some(id => id === f.id)} onClick={() => {
+                    props.toggleIsFollowing(true, f.id)
+                        usersAPI.follow(f.id).then(data => {
                         if(data.resultCode === 0){
                             props.follow(f.id)
-                        }
-                    })
-                }} />
+                            }
+                        props.toggleIsFollowing(false, f.id)
+                        })
+                }}>follow</button>
             }
             </div>)}
         </div>

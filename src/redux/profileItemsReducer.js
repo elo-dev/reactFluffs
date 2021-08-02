@@ -9,6 +9,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const SET_USERS_PROFILE = 'SET_USERS_PROFILE'
+const TOGGLE_IS_FOLLOWING = 'TOGGLE_IS_FOLLOWING'
 
 let initialState = {
   posts: [],
@@ -17,7 +18,8 @@ let initialState = {
   currentPage: 1,
   countLike: 520,
   isFetching: true,
-  profile: null
+  profile: null,
+  isFollowing: []
 }
 
 const UsersReducer = (state = initialState, action) => {
@@ -83,6 +85,13 @@ const UsersReducer = (state = initialState, action) => {
                   return f
               })
           }
+      case TOGGLE_IS_FOLLOWING:
+        return{
+          ...state,
+          isFollowing: action.isFollowing
+          ? [...state.isFollowing, action.userId]
+          : state.isFollowing.filter(id => id != action.userId)
+        }
       case SET_USERS_PROFILE:
         return{...state, profile: action.profile}
       case SET_USERS: 
@@ -172,6 +181,14 @@ export const setUserProfile = (profile) => {
   return{
     type: SET_USERS_PROFILE,
     profile
+  }
+}
+
+export const toggleIsFollowing = (isFollowing, userId) => {
+  return{
+    type: TOGGLE_IS_FOLLOWING,
+    isFollowing,
+    userId
   }
 }
 

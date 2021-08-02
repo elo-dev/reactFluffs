@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, unfollow } from '../../../redux/profileItemsReducer'
+import { follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, unfollow, toggleIsFollowing } from '../../../redux/profileItemsReducer'
 import SideBarRightFriends from './SidebarRightFriends'
 import { usersAPI } from '../../../api/api'
 
@@ -37,7 +37,10 @@ class SideBarRightFriendsContainer extends React.Component{
                                  setCurrentPage={this.props.setCurrentPage}
                                  setTotalUsersCount={this.props.setTotalUsersCount}
                                  toggleIsFetching={this.props.toggleIsFetching}
-                                 onPageChanged={this.onPageChanged} />
+                                 onPageChanged={this.onPageChanged}
+                                 toggleIsFollowing={this.props.toggleIsFollowing}
+                                 isFollowing={this.props.isFollowing}
+                                 />
             </>
         )
     }
@@ -48,9 +51,10 @@ let mapStateToProps = (state) => {
         posts: state.profileItems.posts,
         pageSize: state.profileItems.pageSize,
         totalUsersCount: state.profileItems.totalUsersCount,
-        currentPage: state.profileItems.currentPage
+        currentPage: state.profileItems.currentPage,
+        isFollowing: state.profileItems.isFollowing
     }
 }
 
 export default connect(mapStateToProps,
-    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(SideBarRightFriendsContainer)
+    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleIsFollowing})(SideBarRightFriendsContainer)

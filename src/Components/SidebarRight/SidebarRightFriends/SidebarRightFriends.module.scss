@@ -9,12 +9,18 @@ $second-color: rgba(132, 132, 132, .5);
 }
 
 %button{
+    background-color: #ffffff;
     border: 1px solid $second-color;
     padding: 5px;
     color: $second-color;
     cursor: pointer;
     @extend %hover;
 }
+
+// button{
+//     border: none;
+//     outline: none;
+// }
 
 .pageCount{
     width: 200px;
