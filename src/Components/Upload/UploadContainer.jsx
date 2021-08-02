@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { addPost, onChangeTextPost } from "../../redux/uploadReducer";
 import Upload from "./Upload";
 
 let mapStateToProps = (state) => {
     return{
-        upload: state.upload,
-        isAuth: state.auth.isAuth
+        upload: state.upload
     }
 } 
 
@@ -20,6 +20,8 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-const UploadContainer = connect(mapStateToProps, mapDispatchToProps)(Upload)
+let withRedirect = withAuthRedirect(Upload)
+
+const UploadContainer = connect(mapStateToProps, mapDispatchToProps)(withRedirect)
 
 export default UploadContainer

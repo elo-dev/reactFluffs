@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { follow, setCurrentPage, unfollow, toggleIsFollowing, getUsers } from '../../../redux/profileItemsReducer'
 import SideBarRightFriends from './SidebarRightFriends'
+import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
 
 class SideBarRightFriendsContainer extends React.Component{
 
@@ -40,5 +41,7 @@ let mapStateToProps = (state) => {
     }
 }
 
+let withRedirect = withAuthRedirect(SideBarRightFriendsContainer)
+
 export default connect(mapStateToProps,
-    {follow, unfollow, setCurrentPage, toggleIsFollowing, getUsers})(SideBarRightFriendsContainer)
+    {follow, unfollow, setCurrentPage, toggleIsFollowing, getUsers})(withRedirect)
