@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { setCurrentPage, setUsers, setTotalUsersCount, like, unLike, bookmark, unBookmark, toggleIsFetching, getUsers } from '../../../../redux/profileItemsReducer'
 import ProfileFeedItem from './ProfileFeedItem'
 import Preloader from '../../../common/Preloader/Preloader'
+import { compose } from 'redux'
 
 class ProfileFeedItemContainer extends React.Component{
 
@@ -43,6 +44,11 @@ let mapStateToProps = (state) => {
         isFetching: state.profileItems.isFetching
     }
 }
+
+compose(
+    connect(mapStateToProps,
+    {like, unLike, bookmark, unBookmark, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, getUsers})
+)(ProfileFeedItemContainer)
 
 export default connect(mapStateToProps, 
     {like, unLike, bookmark, unBookmark, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, getUsers})(ProfileFeedItemContainer)

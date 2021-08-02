@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import SidebarLeft from './SidebarLeft'
 import { getUsersProfile } from '../../redux/profileItemsReducer'
+import { withAuthRedirect } from '../../hoc/withAuthRedirect'
+import { compose } from 'redux'
 
 class SidebarLeftContainer extends React.Component{
 
@@ -15,7 +17,6 @@ class SidebarLeftContainer extends React.Component{
     }
 
     render(){
-        if(!this.props.isAuth) return <Redirect to={'/login'}/>
         return(
             <SidebarLeft {...this.props} profile={this.props.profile} />
         )
@@ -23,10 +24,11 @@ class SidebarLeftContainer extends React.Component{
 }
 
 let mapStateToProps = (state) => ({
-    profile: state.profileItems.profile,
-    isAuth: state.auth.isAuth
+    profile: state.profileItems.profile
 })
 
-let WithUrlDataContainerComponent = withRouter(SidebarLeftContainer)
-
-export default connect(mapStateToProps, {getUsersProfile})(WithUrlDataContainerComponent)
+export default compose(
+    connect(mapStateToProps, {getUsersProfile}),
+    withRouter,
+    withAuthRedirect
+)(SidebarLeftContainer)
