@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import style from './SidebarRightFriends.module.scss'
 import userPhoto from '../../../assets/images/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
 import { NavLink } from 'react-router-dom'
-import { usersAPI } from '../../../api/api'
 
 let SideBarRightFriends = (props) => {
 
@@ -31,23 +30,11 @@ let SideBarRightFriends = (props) => {
                 </div>
                 {f.followed
                 ? <button disabled={props.isFollowing.some(id => id === f.id)} onClick={() => {
-                    props.toggleIsFollowing(true, f.id)
-                        usersAPI.unfollow(f.id).then(data => {
-                        if(data.resultCode === 0){
-                            props.unfollow(f.id)
-                            }
-                        props.toggleIsFollowing(false, f.id)
-                        })
-                }}>unfollow</button>
+                    props.unfollow(f.id)
+                }}><FontAwesomeIcon icon='minus' className={style.deleteFriend} /></button>
                 : <button disabled={props.isFollowing.some(id => id === f.id)} onClick={() => {
-                    props.toggleIsFollowing(true, f.id)
-                        usersAPI.follow(f.id).then(data => {
-                        if(data.resultCode === 0){
-                            props.follow(f.id)
-                            }
-                        props.toggleIsFollowing(false, f.id)
-                        })
-                }}>follow</button>
+                    props.follow(f.id)
+                }}><FontAwesomeIcon icon='plus' className={style.addFriend} /></button>
             }
             </div>)}
         </div>

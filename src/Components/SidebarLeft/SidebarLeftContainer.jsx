@@ -1,9 +1,8 @@
 import React from 'react'
-import * as axios from 'axios'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import SidebarLeft from './SidebarLeft'
-import { setUserProfile } from '../../redux/profileItemsReducer'
+import { getUsersProfile } from '../../redux/profileItemsReducer'
 
 class SidebarLeftContainer extends React.Component{
 
@@ -12,9 +11,7 @@ class SidebarLeftContainer extends React.Component{
         if(!userId){
             userId = 2
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
-            this.props.setUserProfile(response.data)
-        })
+        this.props.getUsersProfile(userId)
     }
 
     render(){
@@ -30,4 +27,4 @@ let mapStateToProps = (state) => ({
 
 let WithUrlDataContainerComponent = withRouter(SidebarLeftContainer)
 
-export default connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent)
+export default connect(mapStateToProps, {getUsersProfile})(WithUrlDataContainerComponent)

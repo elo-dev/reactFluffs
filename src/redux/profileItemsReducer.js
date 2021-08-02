@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api"
+
 const LIKE = 'LIKE'
 const UNLIKE = 'UNLIKE'
 const SET_USERS = 'SET_USERS'
@@ -135,14 +137,14 @@ export const unBookmark = (userId) => {
   }
 }
 
-export const follow = (userId) => {
+export const followSuccess = (userId) => {
   return {
       type: FOLLOW,
       userId
   }
 }
 
-export const unfollow = (userId) => {
+export const unfollowSuccess = (userId) => {
   return {
       type: UNFOLLOW,
       userId
@@ -189,6 +191,49 @@ export const toggleIsFollowing = (isFollowing, userId) => {
     type: TOGGLE_IS_FOLLOWING,
     isFollowing,
     userId
+  }
+}
+
+export const getUsers = (currentPage, pageSize) => {
+  return (dispatch) =>{
+      dispatch(toggleIsFetching(true))
+          usersAPI.getUsers(currentPage, pageSize).then(data => {
+              dispatch(toggleIsFetching(false))
+              dispatch(setUsers(data.items))
+              dispatch(setTotalUsersCount(data.totalCount))
+          })
+      }
+}
+
+export const follow = (userId) => {
+    return (dispatch) => {
+      dispatch(toggleIsFollowing(true, userId))
+      usersAPI.follow(userId).then(data => {
+      if(data.resultCode === 0){
+          dispatch(followSuccess(userId))
+          }
+      dispatch(toggleIsFollowing(false, userId))
+      })
+    }
+}
+
+export const unfollow = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleIsFollowing(true, userId))
+    usersAPI.unfollow(userId).then(data => {
+    if(data.resultCode === 0){
+        dispatch(unfollowSuccess(userId))
+        }
+    dispatch(toggleIsFollowing(false, userId))
+    })
+  }
+}
+
+export const getUsersProfile = (userId) => {
+  return (dispatch) => {
+    usersAPI.getProfile(userId).then(data => {
+      dispatch(setUserProfile(data))
+    })
   }
 }
 

@@ -1,29 +1,17 @@
 import React from 'react'
-import axios from 'axios'
 import { connect } from 'react-redux'
-import { setCurrentPage, setUsers, setTotalUsersCount, like, unLike, bookmark, unBookmark, toggleIsFetching } from '../../../../redux/profileItemsReducer'
+import { setCurrentPage, setUsers, setTotalUsersCount, like, unLike, bookmark, unBookmark, toggleIsFetching, getUsers } from '../../../../redux/profileItemsReducer'
 import ProfileFeedItem from './ProfileFeedItem'
 import Preloader from '../../../common/Preloader/Preloader'
-import { usersAPI } from '../../../../api/api'
 
 class ProfileFeedItemContainer extends React.Component{
 
     componentDidMount(){
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(data.items)
-            this.props.setTotalUsersCount(data.totalCount)
-        })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber)
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(data.items)
-        })
+        this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
     render(){
@@ -57,4 +45,4 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, 
-    {like, unLike, bookmark, unBookmark, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(ProfileFeedItemContainer)
+    {like, unLike, bookmark, unBookmark, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, getUsers})(ProfileFeedItemContainer)

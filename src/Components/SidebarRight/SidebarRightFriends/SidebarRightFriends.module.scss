@@ -17,11 +17,6 @@ $second-color: rgba(132, 132, 132, .5);
     @extend %hover;
 }
 
-// button{
-//     border: none;
-//     outline: none;
-// }
-
 .pageCount{
     width: 200px;
     height: 35px;
@@ -74,16 +69,20 @@ $second-color: rgba(132, 132, 132, .5);
             text-transform: lowercase;
         }
     }
-    .deleteFriend{
-        @extend %button;
-        color: rgb(255, 123, 123);
-        &:hover{
-            color: rgb(253, 56, 56);
-            transition: 0.5s all ease;
+    button{
+        border: none;
+        outline: none;
+        .deleteFriend{
+            @extend %button;
+            color: rgb(255, 123, 123);
+            &:hover{
+                color: rgb(253, 56, 56);
+                transition: 0.5s all ease;
+            }
         }
-    }
-    .addFriend{
-        @extend %button;
-        @extend %hover;
+        .addFriend{
+            @extend %button;
+            @extend %hover;
+        }
     }
 }
