@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import style from './SidebarLeft.module.scss'
 import Preloader from '../common/Preloader/Preloader'
 import userPhoto from '../../assets/images/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
+import ProfileStatus from './ProfileStatus'
 
 const SidebarLeft = (props) => {
     if(!props.profile){
@@ -20,6 +21,7 @@ const SidebarLeft = (props) => {
                     <img src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto} alt="" />
                     <div className={style.userInfoDetail}>
                         <span className={style.userInfoName}>{props.profile.fullName}</span>
+                        <ProfileStatus status={'Status is working'} />
                         <span className={style.userInfoHashtag}>@Hashtag</span>
                         <span className={style.userInfoLinks}>
                             <a href=""><FontAwesomeIcon icon={['fab', 'facebook']} /></a>
