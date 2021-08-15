@@ -1,4 +1,4 @@
-import { usersAPI } from "../api/api"
+import { profileAPI, usersAPI } from "../api/api"
 
 const LIKE = 'LIKE'
 const UNLIKE = 'UNLIKE'
@@ -12,6 +12,7 @@ const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const SET_USERS_PROFILE = 'SET_USERS_PROFILE'
 const TOGGLE_IS_FOLLOWING = 'TOGGLE_IS_FOLLOWING'
+const SET_STATUS = 'SET_STATUS'
 
 let initialState = {
   posts: [],
@@ -21,7 +22,8 @@ let initialState = {
   countLike: 520,
   isFetching: true,
   profile: null,
-  isFollowing: []
+  isFollowing: [],
+  status: ''
 }
 
 const UsersReducer = (state = initialState, action) => {
@@ -104,6 +106,8 @@ const UsersReducer = (state = initialState, action) => {
         return {...state, totalUsersCount: action.count}
       case TOGGLE_IS_FETCHING:
         return {...state, isFetching: action.isFetching}
+      case SET_STATUS:
+        return {...state, status: action.status}
       default: 
         return state
     }
@@ -194,6 +198,13 @@ export const toggleIsFollowing = (isFollowing, userId) => {
   }
 }
 
+export const setStatus = (status) => {
+  return{
+    type: SET_STATUS,
+    status
+  }
+}
+
 export const getUsers = (currentPage, pageSize) => {
   return (dispatch) =>{
       dispatch(toggleIsFetching(true))
@@ -235,6 +246,20 @@ export const getUsersProfile = (userId) => {
       dispatch(setUserProfile(data))
     })
   }
+}
+
+export const getStatus = (userId) => (dispatch) => {
+  profileAPI.getStatus(userId).then(data => {
+    dispatch(setStatus(data))
+  })
+}
+
+export const updateStatus = (status) => (dispatch) => {
+  profileAPI.updataStatus(status).then(response => {
+    if(response.data.resultCode === 0){
+      dispatch(setStatus(status))
+    }
+  })
 }
 
 export default UsersReducer

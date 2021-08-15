@@ -21,7 +21,7 @@ const SidebarLeft = (props) => {
                     <img src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto} alt="" />
                     <div className={style.userInfoDetail}>
                         <span className={style.userInfoName}>{props.profile.fullName}</span>
-                        <ProfileStatus status={'Status is working'} />
+                        <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
                         <span className={style.userInfoHashtag}>@Hashtag</span>
                         <span className={style.userInfoLinks}>
                             <a href=""><FontAwesomeIcon icon={['fab', 'facebook']} /></a>
