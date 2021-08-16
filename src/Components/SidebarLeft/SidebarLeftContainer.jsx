@@ -11,7 +11,7 @@ class SidebarLeftContainer extends React.Component{
     componentDidMount(){
         let userId = this.props.match.params.userId
         if(!userId){
-            userId = 18921
+            userId = this.props.authorizedUserId
         }
         this.props.getUsersProfile(userId)
         this.props.getStatus(userId)
@@ -26,6 +26,7 @@ class SidebarLeftContainer extends React.Component{
 
 let mapStateToProps = (state) => ({
     profile: state.profileItems.profile,
+    authorizedUserId: state.auth.userId,
     status: state.profileItems.status
 })
 

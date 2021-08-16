@@ -18,6 +18,7 @@ const Header = (props) => {
                 ? <span className={style.accountNameHeader}>
                     <img src="https://image.flaticon.com/icons/png/512/147/147144.png" alt="" />
                     <p>{props.login}</p>
+                    <FontAwesomeIcon onClick={props.logoutUser} className={style.headerLogout} icon='sign-out-alt' />
                 </span>
                 : <NavLink to={'/login'}>Войти</NavLink>
                 }

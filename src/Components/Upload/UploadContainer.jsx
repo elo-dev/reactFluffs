@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
-import { addPost, onChangeTextPost } from "../../redux/uploadReducer";
+import { addPost } from "../../redux/uploadReducer";
 import Upload from "./Upload";
 
 let mapStateToProps = (state) => {
@@ -12,11 +12,8 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return{
-        onChangePostText: (text) => {
-            dispatch(onChangeTextPost(text))
-        },
-        addPost: (userId) => {
-            dispatch(addPost(userId))
+        addPost: (uploadText) => {
+            dispatch(addPost(uploadText))
         }
     }
 }

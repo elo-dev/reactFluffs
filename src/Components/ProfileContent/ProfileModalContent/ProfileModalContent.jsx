@@ -2,6 +2,9 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import style from './ProfileModalContent.module.scss'
 import ProfileModalComments from './ProfileModalComments/ProfileModalComments'
+import { Field, Form } from 'react-final-form'
+import { composeValidators, maxLength, required } from '../../../utils/validators/validator'
+import formControl from '../../../hoc/formControl/formControl'
 
 const ProfileModalContent = (props) => {
 
@@ -9,16 +12,11 @@ const ProfileModalContent = (props) => {
 
     let elementsComment = state.comments.map(c => <ProfileModalComments key={c.key} id={c.id} name={c.name} comment={c.comment} data={c.data} />)
 
-    let addComment = (e) => {
-        if(e.key === 'Enter'){
-            props.addComment()
-        }
+    let addComment = (value) => {
+        props.addComment(value.commentTextBody)
     } 
 
-    let onChangeComment = (e) => {
-        let comment = e.target.value
-        props.onCommentChange(comment)
-    }
+    const Input = formControl('input')
 
     return(
         <div className={style.modalContentWrapper}>
@@ -57,10 +55,15 @@ const ProfileModalContent = (props) => {
                         <span className={style.avatarComment}>
                             <img src="https://images.pexels.com/photos/7120688/pexels-photo-7120688.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" />
                         </span>
-                        {state.dirty
-                        ? <input className={style.inputDirty} type="text" placeholder="Write your comment..." onChange={onChangeComment} onKeyPress={addComment} value={props.modalComments.newCommentText} />
-                        : <input className={style.inputNotDirty} type="text" placeholder="Write your comment..." onChange={onChangeComment} onKeyPress={addComment} value={props.modalComments.newCommentText} />
-                        }
+                        <Form onSubmit={addComment}>
+                            {({handleSubmit, form}) => (
+                            <form onSubmit={handleSubmit}>
+                                <div>
+                                    <Field className={style.inputDirty} component={Input} type={'text'} placeholder={'Введите комментарий'} name={'commentTextBody'} validate={composeValidators(required, maxLength(100))} />
+                                </div>
+                            </form>
+                            )}
+                        </Form>
                     </div>
                 </div>
             </div>

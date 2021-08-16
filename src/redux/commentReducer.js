@@ -1,5 +1,4 @@
 const ADD_COMMENT = 'ADD-COMMENT'
-const CHANGE_NEW_COMMENT_TEXT = 'CHANGE-NEW-COMMENT-TEXT'
 
 let initialState = {
     comments: [
@@ -9,7 +8,6 @@ let initialState = {
         {id: 4, name: 'Liza', comment: 'Bye'}
     ],
     newCommentText: '',
-    dirty: false
 }
 
 const commentReducer = (state = initialState, action) => {
@@ -17,44 +15,22 @@ const commentReducer = (state = initialState, action) => {
         case ADD_COMMENT:
             let newComment = {
                 id: 5,
-                data: new Date().toLocaleString(),
-                comment: state.newCommentText,
+                comment: action.commentText,
+                data: new Date().toLocaleString()
             }
-            if(state.newCommentText.length > 0){
-                return{
-                    ...state,
-                    newCommentText: '',
-                    comments: [...state.comments, newComment],
-                    dirty: false
-                }
-            }else{
-                return{
-                    ...state
-                }
-            }
-        case CHANGE_NEW_COMMENT_TEXT:
-            if(state.newCommentText.length >= 0){
-                return{
-                    ...state,
-                    newCommentText: action.newComment,
-                    dirty: true,
-                }
+            return{
+                ...state,
+                comments: [...state.comments, newComment],
             }
         default:
             return state
     }
 }
 
-export const addCommentActionCreator = () => {
+export const addCommentActionCreator = (commentText) => {
     return{
-        type: ADD_COMMENT
-    }
-}
-
-export const onCommentChangeActionCreator = (text) => {
-    return{
-        type: CHANGE_NEW_COMMENT_TEXT,
-        newComment: text
+        type: ADD_COMMENT,
+        commentText
     }
 }
 

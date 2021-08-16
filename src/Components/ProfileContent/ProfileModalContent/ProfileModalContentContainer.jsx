@@ -11,11 +11,8 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return{
-        onCommentChange: (text) =>{
-            dispatch(onCommentChangeActionCreator(text))
-        },
-        addComment: () =>{
-            dispatch(addCommentActionCreator())
+        addComment: (commentText) =>{
+            dispatch(addCommentActionCreator(commentText))
         }
     }
 }

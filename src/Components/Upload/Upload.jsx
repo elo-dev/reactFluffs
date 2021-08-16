@@ -1,35 +1,38 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import { Field, Form } from 'react-final-form'
 import { Redirect } from 'react-router-dom'
 import style from './Upload.module.scss'
+import formControl from '../../hoc/formControl/formControl'
+import { composeValidators, maxLength, required } from '../../utils/validators/validator'
 
 const Upload = (props) => {
 
-    let addPost = (e) => {
-        e.preventDefault()
-        props.addPost()
-    }
-
-    let onChangePostText = (e) => {
-        let textPost = e.target.value
-        props.onChangePostText(textPost)
+    let addPost = (value) => {
+        props.addPost(value.uploadText)
     }
 
     if(!props.isAuth) return <Redirect to={'/login'} />
 
+    const Textarea = formControl('textarea')
+
     return(
         <section className={style.uploadWrapper}>
             <div className={style.uploadForm}>
-                <form action="">
-                    <textarea className={style.uploadInput} placeholder="Type something..." name="" id="" cols="30" rows="3" onChange={onChangePostText} value={props.upload.newPostText} ></textarea>
+                <Form onSubmit={addPost}>
+                {({handleSubmit}) => (
+                <form onSubmit={handleSubmit}>
+                    <Field component={Textarea} name={'uploadText'} type='textarea' className={style.uploadInput} placeholder="Type something..." validate={composeValidators(required, maxLength(100))} />
                     <div className={style.uploadItemsWrapper}>
                         <div className={style.uploadItems}>
                             <FontAwesomeIcon icon='camera' />
                             <FontAwesomeIcon icon='video' />
                         </div>
-                        <button className={style.uploadBtn} onClick={addPost} >Upload</button>
+                        <button className={style.uploadBtn}>Upload</button>
                     </div>
                 </form>
+                )}
+                </Form>
             </div>
 
             <div className={style.uploadFilterTitle}>
