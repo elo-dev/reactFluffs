@@ -1,0 +1,21 @@
+.pageCount{
+    width: 200px;
+    height: 35px;
+    border: 1px solid #C1C1C1;
+    overflow: auto;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    span{
+        margin-left: 10px;
+        cursor: pointer;
+        padding: 3px;
+        &:hover{
+            background-color: #00C4CF;
+        }
+    }
+    .selectedPage{
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 18px;
+    }
+}

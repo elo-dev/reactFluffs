@@ -51,23 +51,21 @@ export const getAuthUser = () => (dispatch) => {
     })
 }
 
-export const loginUser = (email, password, rememberMe) => (dispatch) => {
-    authAPI.login(email, password, rememberMe).then(data => {
+export const loginUser = (email, password, rememberMe) => async (dispatch) => {
+    let data = await authAPI.login(email, password, rememberMe)
         if(data.resultCode === 0){
             dispatch(getAuthUser())
         } else {
             let errorMsg = data.messages.length > 0 ? data.messages[0] : 'Some error'
             dispatch(setError(errorMsg))
         }
-    })
 }
 
-export const logoutUser = () => (dispatch) => {
-    authAPI.logout().then(data => {
+export const logoutUser = () => async (dispatch) => {
+    let data = await authAPI.logout()
         if(data.resultCode === 0){
             dispatch(getAuthUser(null, null, null, false))
         }
-    })
 }
 
 

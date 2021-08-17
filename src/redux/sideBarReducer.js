@@ -1,3 +1,5 @@
+import { updateObjInArray } from "../Components/common/objHelper/objHelper"
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 
@@ -11,22 +13,12 @@ const sideBarReducer = (state = initialState, action) => {
         case FOLLOW:
             return{
                 ...state,
-                posts: state.posts.map(f => {
-                    if(f.id === action.userId){
-                        return {...f, followed: true}
-                    }
-                    return f
-                })
+                posts: updateObjInArray(state.posts, 'id', action.userId, {followed: true})
             }
         case UNFOLLOW:
             return{
                 ...state,
-                posts: state.posts.map(f => {
-                    if(f.id === action.userId){
-                        return {...f, followed: false}
-                    }
-                    return f
-                })
+                posts: updateObjInArray(state.posts, 'id', action.userId, {followed: false})
             }
         default: 
             return state

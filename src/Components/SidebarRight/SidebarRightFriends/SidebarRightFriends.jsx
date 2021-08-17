@@ -1,8 +1,6 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import style from './SidebarRightFriends.module.scss'
-import userPhoto from '../../../assets/images/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
-import { NavLink } from 'react-router-dom'
+import Friends from './Friends'
+import Paginator from '../../common/Paginator/Paginator'
 
 let SideBarRightFriends = (props) => {
 
@@ -15,28 +13,16 @@ let SideBarRightFriends = (props) => {
 
     return(
         <div>
-            <div className={style.pageCount}>
-            {pages.map(p => {
-                return <span className={`${style.notSelectedPage} ${props.currentPage === p && style.selectedPage}`} onClick={(e) => {props.onPageChanged(p)}}>{p}</span>
-            })}
-            </div>
-            {props.posts.map(f => <div className={style.friends} key={f.id}>
-                <NavLink to={'/profile/' + f.id}>
-                <img src={f.photos.small != null ? f.photos.small : userPhoto} alt="" />
-                </NavLink>
-                <div className={style.friendsNameWrapper}>
-                    <p className={style.friendsName}>{f.name}</p>
-                    <span className={style.friendsProfileLink}>@link</span>
-                </div>
-                {f.followed
-                ? <button disabled={props.isFollowing.some(id => id === f.id)} onClick={() => {
-                    props.unfollow(f.id)
-                }}><FontAwesomeIcon icon='minus' className={style.deleteFriend} /></button>
-                : <button disabled={props.isFollowing.some(id => id === f.id)} onClick={() => {
-                    props.follow(f.id)
-                }}><FontAwesomeIcon icon='plus' className={style.addFriend} /></button>
-            }
-            </div>)}
+            <Paginator  totalUsersCount={props.totalUsersCount}
+                        pageSize={props.pageSize}
+                        currentPage={props.currentPage}
+                        onPageChanged={props.onPageChanged}                
+                        />
+            {props.posts.map(f => <Friends  f={f}
+                                            isFollowing={props.isFollowing}
+                                            follow={props.follow}
+                                            unfollow={props.unfollow}
+                                            />)}
         </div>
     )
 }
