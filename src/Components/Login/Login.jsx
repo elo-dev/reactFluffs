@@ -13,13 +13,14 @@ const Login = (props) => {
     return(
         <section>
             <h1>Авторизация</h1>
-            <LoginForm loginUser={props.loginUser} />
+            <LoginForm errors={props.errors} loginUser={props.loginUser} />
         </section>
     )
 }
 
 let mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    errors: state.auth.errors
 })
 
 export default connect(mapStateToProps, {loginUser})(Login)
