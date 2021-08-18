@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { addCommentActionCreator, onCommentChangeActionCreator } from '../../../redux/commentReducer'
+import { addCommentActionCreator } from '../../../redux/commentReducer'
 import ProfileModalContent from './ProfileModalContent'
 
 let mapStateToProps = (state) => {
