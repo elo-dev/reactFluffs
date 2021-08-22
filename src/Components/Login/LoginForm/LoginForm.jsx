@@ -7,7 +7,7 @@ import style from './LoginForm.module.scss'
 const LoginForm = (props) => {
 
     const onSubmit = (formData) => {
-        props.loginUser(formData.email, formData.password, formData.rememberMe)
+        props.loginUser(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
 
     const Input = formControl('input')
@@ -26,6 +26,10 @@ const LoginForm = (props) => {
                 <div>
                     <label>rememberMe</label>
                     <Field type={'checkbox'} name={'rememberMe'} component={Input} />
+                </div>
+                <div className={style.captcha}>
+                    {props.captcha && <img src={props.captcha} /> }
+                    {props.captcha && <Field component={Input} name={'captcha'} placeholder='Введите captcha' validate={required} />}
                 </div>
                 <button type='submit' disabled={pristine || submitting}>Войти</button>
                 <strong className={style.errorField}>{props.errors[0]}</strong>
