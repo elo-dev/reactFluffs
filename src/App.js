@@ -11,6 +11,7 @@ import { BrowserRouter, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { initializeApp } from './redux/appReducer'
 import Preloader from './Components/common/Preloader/Preloader'
+import AccountSettingsContainer from './Components/AccountSettings/AccountSettingsContainer'
 
 const ProfilePage = lazy(() => import('./Components/ProfileContent/ProfileContent'))
 const Stories = lazy(() => import('./Components/Stories/Stories'))
@@ -41,6 +42,7 @@ class App extends React.Component {
             <Route path='/explore' render={() => <Explore />} />
             <Route path='/home'    render={() => <Home />} />
             <Route path='/login'   render={() => <LoginPage/>} />
+            <Route path='/settings' render={() => <AccountSettingsContainer />} />
           </Switch>
         </Suspense>
       </div>

@@ -30,69 +30,77 @@ $second-color: #848484;
     grid-area: sbl;
     background-color: rgba(132, 132, 132, .1);
     padding: 30px 10px 0 10px;
-}
-
-.userInfo{
-    margin-bottom: 20px;
-}
-
-.userInfoAbout{
-    text-align: center;
-    img{
-        cursor: pointer;
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        box-shadow: 0px 5px 25px 0px rgba(0,0,0,0.2);
-    }
-}
-
-.userInfoDetail{
-    span{
-        display: block;
-        margin-top: 15px;
-        color: $main-color;
-    }
-    .userInfoName{
-        font-size: 20px;
-        font-weight: 700;
-    }
-    .userInfoHashtag{
-        font-size: 14px;
-    }
-    .userInfoLinks{
-        a{
-            padding: 5px 10px;
-            color: $main-color;
-            @extend %hover;
-        }
-    }
-}
-
-.userSubscribers{
-    @extend %borderBlock;
-    li{
-        list-style: none;
-        padding: 5px 10px;
-        a{
+    .profileSetting{
+        display: flex;
+        justify-content: flex-end;
+        .settingLink{
+            color: black;
             text-decoration: none;
-            color: $main-color;
-            @extend %hover;
-            svg{
-                float: right;
-                vertical-align: middle;
+            .profileSettingIcon{
+                font-size: 20px;
+                cursor: pointer;
+                @extend %hover;
             }
         }
     }
-}
-
-.userBiography{
-    @extend %borderBlock;
-    @extend %paragraph;
-}
-
-.userWebsite{
-    border-bottom: 1px solid rgba(132, 132, 132, .15);
-    @extend %borderBlock;
-    @extend %paragraph;
+    .userInfo{
+        margin-bottom: 20px;
+        .userInfoAbout{
+            text-align: center;
+            img{
+                cursor: pointer;
+                width: 180px;
+                height: 180px;
+                border-radius: 50%;
+                box-shadow: 0px 5px 25px 0px rgba(0,0,0,0.2);
+            }
+            .userInfoDetail{
+                span{
+                    display: block;
+                    margin-top: 15px;
+                    color: $main-color;
+                }
+                .userInfoName{
+                    font-size: 20px;
+                    font-weight: 700;
+                }
+                .userInfoHashtag{
+                    font-size: 14px;
+                }
+                .userInfoLinks{
+                    a{
+                        padding: 5px 10px;
+                        color: $main-color;
+                        @extend %hover;
+                    }
+                }
+            }
+        }
+    }
+    .userSubscribers{
+        @extend %borderBlock;
+        li{
+            list-style: none;
+            padding: 5px 10px;
+            a{
+                text-decoration: none;
+                color: $main-color;
+                @extend %hover;
+                svg{
+                    float: right;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+    .userBiography{
+        @extend %borderBlock;
+        @extend %paragraph;
+    }
+    
+    .userWebsite{
+        border-bottom: 1px solid rgba(132, 132, 132, .15);
+        @extend %borderBlock;
+        @extend %paragraph;
+    }
 }

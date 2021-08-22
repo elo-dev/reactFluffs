@@ -4,21 +4,34 @@ import style from './SidebarLeft.module.scss'
 import Preloader from '../common/Preloader/Preloader'
 import userPhoto from '../../assets/images/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
 import ProfileStatus from './ProfileStatus'
+import { NavLink } from 'react-router-dom'
 
 const SidebarLeft = (props) => {
+
     if(!props.profile){
         return <Preloader />
     }
 
-    let socials = []
-
-    Object.values(props.profile.contacts).map(s => s !== null ? socials.push(s) : null)
+    const photoSelected = (e) => {
+        if(e.target.files.length){
+            props.savePhoto(e.target.files[0])
+        }
+    }
 
     return(
         <section className={style.sideBarLeft}>
+            <div className={style.profileSetting}>
+                <NavLink to='/settings' className={style.settingLink}>
+                    <FontAwesomeIcon className={style.profileSettingIcon} icon={'user-cog'} />
+                </NavLink>
+            </div>
             <div className={style.userInfo}>
                 <div className={style.userInfoAbout}>
                     <img src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto} alt="" />
+                    {props.isOwner && <div>
+                    <input type={'file'} onChange={photoSelected} />
+                    </div>
+                    }
                     <div className={style.userInfoDetail}>
                         <span className={style.userInfoName}>{props.profile.fullName}</span>
                         <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
@@ -39,16 +52,26 @@ const SidebarLeft = (props) => {
                 </ul>
             </div>
             <div className={style.userBiography}>
-                <p>Bio:</p>
-                <p>795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                <h3>Обо мне:</h3>
+                <p>{props.profile.aboutMe}</p>
+                <p>В поисках работы: {props.profile.lookingForAJob ? 'Да' :'Нет'}</p>
+                <p>Профессиональные навыки: {props.profile.lookingForAJobDescription}</p>
             </div>
             <div className={style.userWebsite}>
-                <p>Website:</p>
-                {socials.map(s =>
-                <a href={'https://' + s}>{s}</a>
-                )}
+                <h3>Website:</h3>
+                {Object.keys(props.profile.contacts).map(key => {
+                    return <Contacts key={key} contactTitle={key} contactValue={props.profile.contacts[key]} />
+                })}
             </div>
         </section>
+    )
+}
+
+export const Contacts = ({contactTitle, contactValue}) => {
+    return(
+        <div>
+            <p>{contactTitle}: <a href={contactValue}>{contactValue}</a></p>
+        </div>
     )
 }
 

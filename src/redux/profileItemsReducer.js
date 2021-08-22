@@ -14,6 +14,8 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const SET_USERS_PROFILE = 'SET_USERS_PROFILE'
 const TOGGLE_IS_FOLLOWING = 'TOGGLE_IS_FOLLOWING'
 const SET_STATUS = 'SET_STATUS'
+const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
+const SET_ERROR = 'SET_ERROR'
 
 let initialState = {
   posts: [],
@@ -24,7 +26,8 @@ let initialState = {
   isFetching: true,
   profile: null,
   isFollowing: [],
-  status: ''
+  status: '',
+  errors: []
 }
 
 const UsersReducer = (state = initialState, action) => {
@@ -79,6 +82,10 @@ const UsersReducer = (state = initialState, action) => {
         return {...state, isFetching: action.isFetching}
       case SET_STATUS:
         return {...state, status: action.status}
+      case SAVE_PHOTO_SUCCESS:
+        return {...state, profile: {...state.profile, photos: action.photo}}
+      case SET_ERROR:
+        return {...state, errors: [...state.errors, action.error]}
       default: 
         return state
     }
@@ -176,6 +183,13 @@ export const setStatus = (status) => {
   }
 }
 
+export const savePhotoSuccess = (photo) => {
+  return{
+    type: SAVE_PHOTO_SUCCESS,
+    photo
+  }
+}
+
 export const getUsers = (currentPage, pageSize) => async (dispatch) =>{
   dispatch(toggleIsFetching(true))
   dispatch(setCurrentPage(currentPage))
@@ -216,6 +230,36 @@ export const updateStatus = (status) => async (dispatch) => {
   let response = await profileAPI.updataStatus(status)
     if(response.data.resultCode === 0){
       dispatch(setStatus(status))
+    }
+}
+
+export const savePhoto = (photo) => async (dispatch) => {
+  let response = await profileAPI.savePhoto(photo)
+    if(response.data.resultCode === 0){
+      dispatch(savePhotoSuccess(response.data.data.photos))
+    }
+}
+
+export const setError = (error) => {
+  return{
+    type: SET_ERROR,
+    error
+  }
+}
+
+export const updateProfile = (profile) => async (dispatch, getState) => {
+  const userId = getState().auth.userId
+  let response = await profileAPI.updateProfile(profile)
+    if(response.data.resultCode === 0){
+      dispatch(getUsersProfile(userId))
+    }else{
+      let msgError = []
+      if(response.data.messages.length > 0){
+        response.data.messages.map(error => {
+          msgError.push(error)
+        })
+      }
+      dispatch(setError(msgError))
     }
 }
 
