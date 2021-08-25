@@ -7,7 +7,7 @@ import UploadContainer from './Components/Upload/UploadContainer'
 import Explore from './Components/Explore/Explore'
 import Home from './Components/Home/Home'
 import { Route } from 'react-router'
-import { BrowserRouter, Switch } from 'react-router-dom'
+import { BrowserRouter, Redirect, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { initializeApp } from './redux/appReducer'
 import Preloader from './Components/common/Preloader/Preloader'
@@ -36,6 +36,7 @@ class App extends React.Component {
         <Navbar />
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
+            <Redirect exact from="/" to="/profile" />
             <Route exact path='/profile/:userId?' render={() => <ProfilePage />} />
             <Route path='/stories' render={() => <Stories />} />
             <Route path='/upload'  render={() => <UploadContainer />} />

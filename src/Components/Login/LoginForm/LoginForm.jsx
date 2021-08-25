@@ -32,7 +32,7 @@ const LoginForm = (props) => {
                     {props.captcha && <Field component={Input} name={'captcha'} placeholder='Введите captcha' validate={required} />}
                 </div>
                 <button type='submit' disabled={pristine || submitting}>Войти</button>
-                <strong className={style.errorField}>{props.errors[0]}</strong>
+                <strong className={style.errorField}>{props.errors}</strong>
             </form>
             )}
         </Form>

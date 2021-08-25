@@ -1,13 +1,16 @@
 import { updateObjInArray } from "../Components/common/objHelper/objHelper"
+import { UserType } from "../types/types"
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 
 let initialState = {
-    posts: []
+    posts: [] as Array<UserType>
 }
 
-const sideBarReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+const sideBarReducer = (state = initialState, action: any): InitialStateType => {
     
     switch(action.type){
         case FOLLOW:
@@ -25,14 +28,24 @@ const sideBarReducer = (state = initialState, action) => {
     }
 }
 
-export const followActionCreator = (userId) => {
+type FollowActionCreatorActionType = {
+    type: typeof FOLLOW
+    userId: number
+}
+
+export const followActionCreator = (userId: number): FollowActionCreatorActionType => {
     return {
         type: FOLLOW,
         userId
     }
 }
 
-export const unfollowActionCreator = (userId) => {
+type UnfollowActionCreatorActionType = {
+    type: typeof UNFOLLOW
+    userId: number
+}
+
+export const unfollowActionCreator = (userId: number): UnfollowActionCreatorActionType => {
     return {
         type: UNFOLLOW,
         userId

@@ -1,5 +1,6 @@
 import { profileAPI, usersAPI } from "../api/api"
 import { updateObjInArray } from "../Components/common/objHelper/objHelper"
+import { PhotosType, ProfileType, UserType } from "../types/types"
 
 const LIKE = 'LIKE'
 const UNLIKE = 'UNLIKE'
@@ -18,19 +19,21 @@ const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
 const SET_ERROR = 'SET_ERROR'
 
 let initialState = {
-  posts: [],
+  posts: [] as Array<UserType>,
   pageSize: 5,
   totalUsersCount: 0,
   currentPage: 1,
   countLike: 520,
   isFetching: true,
-  profile: null,
-  isFollowing: [],
+  profile: null as ProfileType | null,
+  isFollowing: [] as Array<number>,
   status: '',
-  errors: []
+  // errors: []
 }
 
-const UsersReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+const UsersReducer = (state = initialState, action: any): InitialStateType => {
 
     switch(action.type){
       case LIKE:
@@ -77,98 +80,159 @@ const UsersReducer = (state = initialState, action) => {
       case SET_CURRENT_PAGE: 
         return {...state, currentPage: action.currentPage}
       case SET_TOTAL_USERS_COUNT: 
-        return {...state, totalUsersCount: action.count}
+        return {...state, totalUsersCount: action.totalUsers}
       case TOGGLE_IS_FETCHING:
         return {...state, isFetching: action.isFetching}
       case SET_STATUS:
         return {...state, status: action.status}
       case SAVE_PHOTO_SUCCESS:
-        return {...state, profile: {...state.profile, photos: action.photo}}
-      case SET_ERROR:
-        return {...state, errors: [...state.errors, action.error]}
+        return {...state, profile: {...state.profile, photos: action.photo} as ProfileType}
+      // case SET_ERROR:
+        // return {...state, errors: [...state.errors, action.error]}
       default: 
         return state
     }
 }
 
-export const like = (userId) => {
+type LikeActionType = {
+  type: typeof LIKE
+  userId: number
+}
+
+export const like = (userId: number): LikeActionType => {
   return {
     type: LIKE,
     userId
   }
 }
+
+type UnlikeActionType = {
+  type: typeof UNLIKE
+  userId: number
+}
   
-export const unLike = (userId) => {
+export const unLike = (userId: number): UnlikeActionType => {
   return {
     type: UNLIKE,
     userId
   }
 }
 
-export const bookmark = (userId) => {
+type BookmarkActionType = {
+  type: typeof BOOKMARK
+  userId: number
+}
+
+export const bookmark = (userId: number): BookmarkActionType => {
   return {
     type: BOOKMARK,
     userId
   }
 }
+
+type UnbookmarkActionType = {
+  type: typeof UNBOOKMARK
+  userId: number
+}
   
-export const unBookmark = (userId) => {
+export const unBookmark = (userId: number): UnbookmarkActionType => {
   return {
     type: UNBOOKMARK,
     userId
   }
 }
 
-export const followSuccess = (userId) => {
+type FollowSuccessActionType = {
+  type: typeof FOLLOW
+  userId: number
+}
+
+export const followSuccess = (userId: number): FollowSuccessActionType => {
   return {
       type: FOLLOW,
       userId
   }
 }
 
-export const unfollowSuccess = (userId) => {
+type UnfollowSuccessActionType = {
+  type: typeof UNFOLLOW
+  userId: number
+}
+
+export const unfollowSuccess = (userId: number): UnfollowSuccessActionType => {
   return {
       type: UNFOLLOW,
       userId
   }
 }
 
-export const setUsers = (posts) => {
+type SetUsersActionType = {
+  type: typeof SET_USERS
+  posts: Array<UserType>
+}
+
+export const setUsers = (posts: Array<UserType>): SetUsersActionType => {
   return {
     type: SET_USERS,
     posts
   }
 }
 
-export const setCurrentPage = (currentPage) => {
+type SetCurrentPageActionType = {
+  type: typeof SET_CURRENT_PAGE
+  currentPage: number
+}
+
+export const setCurrentPage = (currentPage: number): SetCurrentPageActionType => {
   return {
     type: SET_CURRENT_PAGE,
     currentPage
   }
 }
 
-export const setTotalUsersCount = (totalUsers) => {
+type SetTotalUsersCountActionType = {
+  type: typeof SET_TOTAL_USERS_COUNT
+  totalUsers: number
+}
+
+export const setTotalUsersCount = (totalUsers: number): SetTotalUsersCountActionType => {
   return {
     type: SET_TOTAL_USERS_COUNT,
-    count: totalUsers
+    totalUsers
   }
 }
 
-export const toggleIsFetching = (isFetching) => {
+type ToggleIsFetchingActionType = {
+  type: typeof TOGGLE_IS_FETCHING
+  isFetching: boolean
+}
+
+export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionType => {
   return {
     type: TOGGLE_IS_FETCHING,
     isFetching
   }
 }
 
-export const setUserProfile = (profile) => {
+export type SetUserProfileActionType = {
+  type: typeof SET_USERS_PROFILE
+  profile: ProfileType
+}
+
+export const setUserProfile = (profile: ProfileType): SetUserProfileActionType => {
   return{
     type: SET_USERS_PROFILE,
     profile
   }
 }
 
-export const toggleIsFollowing = (isFollowing, userId) => {
+type toggleIsFollowingActionType = {
+  type: typeof TOGGLE_IS_FOLLOWING
+  isFollowing: boolean
+  userId: number
+}
+
+export const toggleIsFollowing = (isFollowing: boolean, userId: number): toggleIsFollowingActionType => {
   return{
     type: TOGGLE_IS_FOLLOWING,
     isFollowing,
@@ -176,21 +240,31 @@ export const toggleIsFollowing = (isFollowing, userId) => {
   }
 }
 
-export const setStatus = (status) => {
+type SetStatusActionType = {
+  type: typeof SET_STATUS
+  status: string
+}
+
+export const setStatus = (status: string): SetStatusActionType => {
   return{
     type: SET_STATUS,
     status
   }
 }
 
-export const savePhotoSuccess = (photo) => {
+type SavePhotoSuccessActionType = {
+  type: typeof SAVE_PHOTO_SUCCESS
+  photo: PhotosType
+}
+
+export const savePhotoSuccess = (photo: PhotosType): SavePhotoSuccessActionType => {
   return{
     type: SAVE_PHOTO_SUCCESS,
     photo
   }
 }
 
-export const getUsers = (currentPage, pageSize) => async (dispatch) =>{
+export const getUsers = (currentPage: number, pageSize: number) => async (dispatch: any) =>{
   dispatch(toggleIsFetching(true))
   dispatch(setCurrentPage(currentPage))
   let data = await usersAPI.getUsers(currentPage, pageSize)
@@ -199,7 +273,7 @@ export const getUsers = (currentPage, pageSize) => async (dispatch) =>{
   dispatch(setTotalUsersCount(data.totalCount))
 }
 
-const followUnfollowFlow = async (userId, apiMethod, dispatch, actionCreator) => {
+const followUnfollowFlow = async (userId: number, apiMethod: any, dispatch: any, actionCreator: any) => {
   dispatch(toggleIsFollowing(true, userId))
   let data = await apiMethod(userId)
   if(data.resultCode === 0){
@@ -208,59 +282,65 @@ const followUnfollowFlow = async (userId, apiMethod, dispatch, actionCreator) =>
   dispatch(toggleIsFollowing(false, userId))
 }
 
-export const follow = (userId) => async (dispatch) => {
+export const follow = (userId: number) => async (dispatch: any) => {
   followUnfollowFlow(userId, usersAPI.follow.bind(usersAPI), dispatch, followSuccess)
 }
 
-export const unfollow = (userId) => async (dispatch) => {
+export const unfollow = (userId: number) => async (dispatch: any) => {
   followUnfollowFlow(userId, usersAPI.unfollow.bind(usersAPI), dispatch, unfollowSuccess)
 }
 
-export const getUsersProfile = (userId) => async (dispatch) => {
+export const getUsersProfile = (userId: number) => async (dispatch: any) => {
   let data = await usersAPI.getProfile(userId)
     dispatch(setUserProfile(data))
 }
 
-export const getStatus = (userId) => async (dispatch) => {
+export const getStatus = (userId: number) => async (dispatch: any) => {
   let data = await profileAPI.getStatus(userId)
     dispatch(setStatus(data))
 }
 
-export const updateStatus = (status) => async (dispatch) => {
+export const updateStatus = (status: string) => async (dispatch: any) => {
   let response = await profileAPI.updataStatus(status)
     if(response.data.resultCode === 0){
       dispatch(setStatus(status))
     }
 }
 
-export const savePhoto = (photo) => async (dispatch) => {
+export const savePhoto = (photo: any) => async (dispatch: any) => {
   let response = await profileAPI.savePhoto(photo)
     if(response.data.resultCode === 0){
       dispatch(savePhotoSuccess(response.data.data.photos))
     }
 }
 
-export const setError = (error) => {
+type SetError = {
+  type: typeof SET_ERROR
+  error: string
+}
+
+export const setError = (error: string): SetError => {
   return{
     type: SET_ERROR,
     error
   }
 }
 
-export const updateProfile = (profile) => async (dispatch, getState) => {
+export const updateProfile = (profile: ProfileType) => async (dispatch: any, getState: any) => {
   const userId = getState().auth.userId
   let response = await profileAPI.updateProfile(profile)
     if(response.data.resultCode === 0){
       dispatch(getUsersProfile(userId))
-    }else{
-      let msgError = []
-      if(response.data.messages.length > 0){
-        response.data.messages.map(error => {
-          msgError.push(error)
-        })
-      }
-      dispatch(setError(msgError))
     }
+    // else{
+    //   let msgError = []
+    //   if(response.data.messages.length > 0){
+    //     response.data.messages.map(error => {
+    //       msgError.push(error)
+    //     })
+    //   }
+    //   dispatch(setError(msgError))
+    // }
 }
 
 export default UsersReducer
