@@ -5,14 +5,25 @@ import ProfileModalComments from './ProfileModalComments/ProfileModalComments'
 import { Field, Form } from 'react-final-form'
 import { composeValidators, maxLength, required } from '../../../utils/validators/validator'
 import formControl from '../../../hoc/formControl/formControl'
+import { InitialStateType } from '../../../redux/commentReducer'
+import { UploadInitialStateType } from '../../../redux/uploadReducer'
 
-const ProfileModalContent = (props) => {
+export type MapStateToProps = {
+    modalComments: InitialStateType
+    upload: UploadInitialStateType
+}
+
+export type MapDispatchType = {
+    addComment: (comment: string) => void
+}
+
+const ProfileModalContent: React.FC<MapStateToProps & MapDispatchType> = (props) => {
 
     let state = props.modalComments
 
-    let elementsComment = state.comments.map(c => <ProfileModalComments key={c.key} id={c.id} name={c.name} comment={c.comment} data={c.data} />)
+    let elementsComment = state.comments.map(c => <ProfileModalComments id={c.id} name={c.name} comment={c.comment} />)
 
-    let addComment = (value) => {
+    let addComment = (value: {commentTextBody: string}) => {
         props.addComment(value.commentTextBody)
     } 
 
@@ -23,7 +34,7 @@ const ProfileModalContent = (props) => {
             <div className={style.modalBodyLeftSide}>
                 <img src="https://images.pexels.com/photos/5913194/pexels-photo-5913194.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" />
                 <div className={style.modalBodyLeftSideComment}>
-                {props.upload.post.map(p => <p>{p.postText}</p>)}
+                {props.modalComments.comments.map(p => <p>{p.comment}</p>)}
                 </div>
             </div>
             <div className={style.modalBodyRightSide}>

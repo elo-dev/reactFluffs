@@ -3,7 +3,16 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import style from './Header.module.scss'
 import { NavLink } from 'react-router-dom'
 
-const Header = (props) => {
+export type PropsType = { 
+    isAuth: boolean
+    login: string | null
+}
+
+export type DispatchToProps = {
+    logoutUser: () => void
+}
+
+const Header: React.FC<PropsType & DispatchToProps> = (props) => {
     return(
         <header className={style.appHeader}>
             <div className={style.titleHeader}>

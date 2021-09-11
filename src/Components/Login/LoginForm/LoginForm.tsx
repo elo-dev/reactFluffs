@@ -4,9 +4,16 @@ import formControl from '../../../hoc/formControl/formControl'
 import { composeValidators, maxLength, required } from '../../../utils/validators/validator'
 import style from './LoginForm.module.scss'
 
-const LoginForm = (props) => {
+const LoginForm = (props: any) => {
 
-    const onSubmit = (formData) => {
+    type FormDataType = {
+        email: string,
+        password: string,
+        rememberMe: boolean,
+        captcha: string
+    }
+
+    const onSubmit = (formData: FormDataType) => {
         props.loginUser(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
 

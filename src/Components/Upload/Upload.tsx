@@ -5,14 +5,23 @@ import { Redirect } from 'react-router-dom'
 import style from './Upload.module.scss'
 import formControl from '../../hoc/formControl/formControl'
 import { composeValidators, maxLength, required } from '../../utils/validators/validator'
+import { UploadInitialStateType } from '../../redux/uploadReducer'
 
-const Upload = (props) => {
+export type MapPropsType = {
+    upload: UploadInitialStateType
+}
 
-    let addPost = (value) => {
+export type MapDispatchPropsType = {
+    addPost: (newText: string) => void
+}
+
+const Upload: React.FC<MapPropsType & MapDispatchPropsType> = (props) => {
+
+    let addPost = (value: {uploadText: string}) => {
         props.addPost(value.uploadText)
     }
 
-    if(!props.isAuth) return <Redirect to={'/login'} />
+    // if(!props.isAuth) return <Redirect to={'/login'} />
 
     const Textarea = formControl('textarea')
 

@@ -3,10 +3,6 @@ import style from './SideBarRight.module.scss'
 import SideBarRightFriendsContainer from './SideBarRightFriends/SideBarRightFriendsContainer'
 
 const SideBarRight = (props) => {
-    // let state = props.profileSideBarRight
-
-    // let friendsElement = state.friends.map(f => <SideBarRightFriendsContainer key={f.id} id={f.id} name={f.name} photo={f.photo} link={f.link} />)
-
     return(
         <div className={style.sideBarRightWrapper}>
                 <div className={style.friendsWrapper}>

@@ -1,8 +1,5 @@
-const CHANGE_LIKE = 'CHANGE-LIKE'
-const CHANGE_UNLIKE = 'CHANGE-UNLIKE'
-const BOOKMARK = 'BOOKMARK'
-const UNBOOKMARK = 'UNBOOKMARK'
-const ADD_POST = 'ADD-POST'
+import { InferActionsType } from "./redux-store"
+import { updateObjInArray } from '../Components/common/objHelper/objHelper'
 
 let initialState = {
     post: [
@@ -34,53 +31,37 @@ let initialState = {
     ]
 }
 
-const uploadReducer = (state = initialState, action) => {
+export type UploadInitialStateType = typeof initialState
+type ActionsType = InferActionsType<typeof actions>
+
+const uploadReducer = (state = initialState, action: ActionsType): UploadInitialStateType => {
     switch(action.type){
-        case CHANGE_LIKE:
+        case 'CHANGE-LIKE':
             return{
                 ...state,
-                post: state.post.map(p => {
-                    if(p.id === action.userId){
-                        return{...p, liked: true}
-                    }
-                    return p
-                })
+                post: updateObjInArray(state.post, 'id', action.userId, {followed: true})
             }
-        case CHANGE_UNLIKE:
+        case 'CHANGE-UNLIKE':
             return{
                 ...state,
-                post: state.post.map(p => {
-                    if(p.id === action.userId){
-                        return{...p, liked: false}
-                    }
-                    return p
-                })
+                post: updateObjInArray(state.post, 'id', action.userId, {followed: false})
             }
-        case BOOKMARK:
+        case 'BOOKMARK':
             return{
                 ...state,
-                post: state.post.map(p => {
-                    if(p.id === action.userId){
-                        return{...p, bookmark: true}
-                    }
-                    return p
-                })
+                post: updateObjInArray(state.post, 'id', action.userId, {bookmark: true})
             }
-        case UNBOOKMARK:
+        case 'UNBOOKMARK':
             return{
                 ...state,
-                post: state.post.map(p => {
-                    if(p.id === action.userId){
-                        return{...p, bookmark: false}
-                    }
-                    return p
-                })
+                post: updateObjInArray(state.post, 'id', action.userId, {bookmark: false})
             }
-        case ADD_POST:
+        case 'ADD-POST':
             let newPost = {
                 id: 6,
                 countLike: '50',
                 postText: action.uploadText,
+                bookmark: false,
                 preview: 'https://images.pexels.com/photos/6805701/pexels-photo-6805701.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
             }
             return{
@@ -92,39 +73,16 @@ const uploadReducer = (state = initialState, action) => {
     }
 }
 
-export const onLikeChangeActionCreator = (userId) => {
-    return{
-        type: CHANGE_LIKE,
-        userId
-    }
-}
-
-export const onUnLikeChangeActionCreator = (userId) => {
-    return{
-        type: CHANGE_UNLIKE,
-        userId
-    }
-}
-
-export const onChangeBookmarkActionCreator = (userId) => {
-    return{
-        type: BOOKMARK,
-        userId
-    }
-}
-
-export const onChangeUnBookmarkActionCreator = (userId) => {
-    return{
-        type: UNBOOKMARK,
-        userId
-    }
-}
-
-export const addPost = (uploadText) => {
-    return{
-        type: ADD_POST,
-        uploadText
-    }
+export const actions = {
+    onLikeChangeActionCreator: (userId: number) => ({type: 'CHANGE-LIKE', userId} as const),
+    
+    onUnLikeChangeActionCreator: (userId: number) => ({type: 'CHANGE-UNLIKE', userId} as const),
+    
+    onChangeBookmarkActionCreator: (userId: number) => ({type: 'BOOKMARK', userId} as const),
+    
+    onChangeUnBookmarkActionCreator: (userId: number) => ({type: 'UNBOOKMARK', userId} as const),
+    
+    addPost: (uploadText: string) => ({type: 'ADD-POST', uploadText} as const)
 }
 
 export default uploadReducer

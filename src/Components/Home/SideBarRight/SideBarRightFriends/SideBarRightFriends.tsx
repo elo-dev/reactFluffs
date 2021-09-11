@@ -1,13 +1,20 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import style from './SideBarRightFriends.module.scss'
+import { InitialStateType } from '../../../../redux/sideBarReducer'
 
-class SideBarRightFriends extends React.Component{
+export type PropsType = {
+    profileSideBarRight: InitialStateType
+    unfollow: (id: number) => void
+    follow: (id: number) => void
+}
+
+class SideBarRightFriends extends React.Component<PropsType>{
     render(){
         return(
             <section>
-                {this.props.profileSideBarRight.friends.map(u => <div className={style.friends} key={u.id}>
-                    <img src={u.photo} alt="" />
+                {this.props.profileSideBarRight.posts.map(u => <div className={style.friends} key={u.id}>
+                    <img src={u.photos.small as string} alt="" />
                     <div className={style.friendsNameWrapper}>
                         <p className={style.friendsName}>{u.name}</p>
                         <span className={style.friendsProfileLink}>@{u.link}</span>

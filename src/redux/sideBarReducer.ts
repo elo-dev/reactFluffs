@@ -1,24 +1,23 @@
 import { updateObjInArray } from "../Components/common/objHelper/objHelper"
 import { UserType } from "../types/types"
-
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
+import { InferActionsType } from "./redux-store"
 
 let initialState = {
     posts: [] as Array<UserType>
 }
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
+type ActionsType = InferActionsType<typeof actions>
 
-const sideBarReducer = (state = initialState, action: any): InitialStateType => {
+const sideBarReducer = (state = initialState, action: ActionsType): InitialStateType => {
     
     switch(action.type){
-        case FOLLOW:
+        case 'FOLLOW':
             return{
                 ...state,
                 posts: updateObjInArray(state.posts, 'id', action.userId, {followed: true})
             }
-        case UNFOLLOW:
+        case 'UNFOLLOW':
             return{
                 ...state,
                 posts: updateObjInArray(state.posts, 'id', action.userId, {followed: false})
@@ -28,28 +27,10 @@ const sideBarReducer = (state = initialState, action: any): InitialStateType => 
     }
 }
 
-type FollowActionCreatorActionType = {
-    type: typeof FOLLOW
-    userId: number
-}
-
-export const followActionCreator = (userId: number): FollowActionCreatorActionType => {
-    return {
-        type: FOLLOW,
-        userId
-    }
-}
-
-type UnfollowActionCreatorActionType = {
-    type: typeof UNFOLLOW
-    userId: number
-}
-
-export const unfollowActionCreator = (userId: number): UnfollowActionCreatorActionType => {
-    return {
-        type: UNFOLLOW,
-        userId
-    }
+export const actions = {
+    followActionCreator: (userId: number) => ({type: 'FOLLOW',userId} as const),
+    
+    unfollowActionCreator: (userId: number) => ({type: 'UNFOLLOW', userId} as const)
 }
 
 export default sideBarReducer

@@ -1,16 +1,34 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { follow, setCurrentPage, unfollow, toggleIsFollowing, getUsers } from '../../../redux/profileItemsReducer'
+import { follow, unfollow, getUsers } from '../../../redux/profileItemsReducer'
 import SideBarRightFriends from './SidebarRightFriends'
 import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
+import { UserType } from '../../../types/types'
+import { AppStateType } from '../../../redux/redux-store'
 
-class SideBarRightFriendsContainer extends React.Component{
+type MapStatePropsType = {
+    currentPage: number,
+    pageSize: number,
+    posts: Array<UserType>,
+    totalUsersCount: number,
+    isFollowing: Array<number>,
+}
+
+type MapDispatchPropsType = {
+    follow: (userId: number) => void,
+    unfollow: (userId: number) => void,
+    getUsers: (currentPage: number, pageSize: number) => void,
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType
+
+class SideBarRightFriendsContainer extends React.Component<PropsType>{
 
     componentDidMount(){
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
-    onPageChanged = (pageNumber) => {
+    onPageChanged = (pageNumber: number) => {
         this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
@@ -31,7 +49,7 @@ class SideBarRightFriendsContainer extends React.Component{
     }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return{
         posts: state.profileItems.posts,
         pageSize: state.profileItems.pageSize,
@@ -44,4 +62,4 @@ let mapStateToProps = (state) => {
 let withRedirect = withAuthRedirect(SideBarRightFriendsContainer)
 
 export default connect(mapStateToProps,
-    {follow, unfollow, setCurrentPage, toggleIsFollowing, getUsers})(withRedirect)
+    {follow, unfollow, getUsers})(withRedirect)

@@ -1,30 +1,51 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 import SidebarLeft from './SidebarLeft'
 import { getUsersProfile, getStatus, updateStatus, savePhoto } from '../../redux/profileItemsReducer'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 import { compose } from 'redux'
+import { ProfileType } from '../../types/types'
+import { AppStateType } from '../../redux/redux-store'
 
-class SidebarLeftContainer extends React.Component{
+type MapStatePropsType = {
+    profile: ProfileType | null,
+    authorizedUserId: number | null,
+    status: string,    
+}
+
+type MapDispatchPropsType = {
+    getUsersProfile: (userId: number) => void,
+    getStatus: (userId: number) => void,
+    updateStatus: (status: string) => void,
+    savePhoto: (photo: File) => void
+}
+
+type PathParamsType = {
+    userId: string
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType & RouteComponentProps<PathParamsType>
+
+class SidebarLeftContainer extends React.Component<PropsType>{
 
     refreshProfile(){
-        let userId = this.props.match.params.userId
+        let userId: number | null = +this.props.match.params.userId
         if(!userId){
             userId = this.props.authorizedUserId
             if(!userId){
                 this.props.history.push('/login')
             }
         }
-        this.props.getUsersProfile(userId)
-        this.props.getStatus(userId)
+        this.props.getUsersProfile(userId as number)
+        this.props.getStatus(userId as number)
     }
 
     componentDidMount(){
         this.refreshProfile()
     }
 
-    componentDidUpdate(prevProps, prevState){
+    componentDidUpdate(prevProps: PropsType, prevState: PropsType){
         if(this.props.match.params.userId != prevProps.match.params.userId){
             this.refreshProfile()
         }
@@ -43,7 +64,7 @@ class SidebarLeftContainer extends React.Component{
     }
 }
 
-let mapStateToProps = (state) => ({
+let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     profile: state.profileItems.profile,
     authorizedUserId: state.auth.userId,
     status: state.profileItems.status

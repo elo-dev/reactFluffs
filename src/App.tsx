@@ -12,12 +12,18 @@ import { connect } from 'react-redux'
 import { initializeApp } from './redux/appReducer'
 import Preloader from './Components/common/Preloader/Preloader'
 import AccountSettingsContainer from './Components/AccountSettings/AccountSettingsContainer'
+import { AppStateType } from './redux/redux-store'
 
 const ProfilePage = lazy(() => import('./Components/ProfileContent/ProfileContent'))
 const Stories = lazy(() => import('./Components/Stories/Stories'))
 const LoginPage = lazy(() => import('./Components/Login/Login'))
 
-class App extends React.Component {
+type MapStatePropsType = ReturnType<typeof mapStateToProps>
+type MapDispatchPropsType = {
+  initializeApp: () => void
+}
+
+class App extends React.Component<MapStatePropsType & MapDispatchPropsType> {
 
   componentDidMount(){
     this.props.initializeApp()
@@ -52,7 +58,7 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType) => {
   return{
     initialized: state.app.initialized
   }

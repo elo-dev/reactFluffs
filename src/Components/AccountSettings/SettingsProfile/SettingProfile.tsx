@@ -1,15 +1,21 @@
 import React from 'react'
 import { Field, Form } from 'react-final-form'
 import formControl from '../../../hoc/formControl/formControl'
+import { ProfileType } from '../../../types/types'
 import { composeValidators, maxLength, required } from '../../../utils/validators/validator'
 import style from './SettingProfile.module.scss'
 
-const SettingProfile = (props) => {
+type PropsType = {
+    profile: ProfileType
+    updateProfile: (profile: ProfileType) => void
+}
+
+const SettingProfile: React.FC<PropsType> = (props) => {
 
     const Input = formControl('input')
     const TextArea = formControl('textarea')
 
-    const onSubmit = (profile) => {
+    const onSubmit = (profile: ProfileType) => {
         props.updateProfile(profile)
     }
 
@@ -43,7 +49,7 @@ const SettingProfile = (props) => {
                         })}
                     </div>
                     <button className={style.btnSubmit} disabled={pristine || submitting}>Сохранить</button>
-                    {props.errors.map(error => <strong className={style.errorSubmit}>{error}</strong>)}
+                    {/* {props.errors.map(error => <strong className={style.errorSubmit}>{error}</strong>)} */}
                 </form>
                 )}
             </Form>

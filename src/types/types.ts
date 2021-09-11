@@ -23,6 +23,7 @@ export type ContactsType = {
 export type ProfileType = {
     userId: number
     lookingForAJob: boolean
+    aboutMe: string
     lookingForAJobDescription: string
     fullName: string
     contacts: ContactsType,
@@ -34,4 +35,8 @@ export type UserType = {
     name: string
     status: string
     photos: PhotosType
+    link: string
+    followed: boolean
+    liked: boolean
+    bookmark: boolean
 }
