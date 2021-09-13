@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Field, Form } from 'react-final-form'
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 import style from './Upload.module.scss'
 import formControl from '../../hoc/formControl/formControl'
 import { composeValidators, maxLength, required } from '../../utils/validators/validator'

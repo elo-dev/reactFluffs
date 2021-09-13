@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getUsers } from '../../../../redux/profileItemsReducer'
+import { FilterType, getUsers } from '../../../../redux/profileItemsReducer'
 import ProfileFeedItem from './ProfileFeedItem'
 import Preloader from '../../../common/Preloader/Preloader'
 import { AppStateType } from '../../../../redux/redux-store'
@@ -13,6 +13,7 @@ type MapStatePropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    filter: FilterType
 } 
 
 type MapDispatchPropsType = {
@@ -21,17 +22,19 @@ type MapDispatchPropsType = {
     unLike: (id: number) => void
     bookmark: (id: number) => void
     unBookmark: (id: number) => void
-    getUsers: (currentPage: number, pageSize: number) => void
+    getUsers: (currentPage: number, pageSize: number, filter: FilterType) => void
 }
 
 class ProfileFeedItemContainer extends React.Component<MapStatePropsType & MapDispatchPropsType>{
 
     componentDidMount(){
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize, filter} = this.props
+        this.props.getUsers(currentPage, pageSize, filter)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        const {pageSize, filter} = this.props
+        this.props.getUsers(pageNumber, pageSize, filter)
     }
 
     render(){
@@ -60,7 +63,8 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         pageSize: state.profileItems.pageSize,
         totalUsersCount: state.profileItems.totalUsersCount,
         currentPage: state.profileItems.currentPage,
-        isFetching: state.profileItems.isFetching
+        isFetching: state.profileItems.isFetching,
+        filter: state.profileItems.filter
     }
 }
 
@@ -69,7 +73,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 //     {like, unLike, bookmark, unBookmark, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, getUsers})
 // )(ProfileFeedItemContainer)
 
-export default connect(mapStateToProps, 
+export default connect<MapStatePropsType, {}, {}, AppStateType>(mapStateToProps,
     {like: actions.like, unLike: actions.unLike,
     bookmark: actions.bookmark, unBookmark: actions.unBookmark,
     setUsers: actions.setUsers, setCurrentPage: actions.setCurrentPage,

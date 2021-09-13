@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { follow, unfollow, getUsers } from '../../../redux/profileItemsReducer'
+import { follow, unfollow, getUsers, FilterType } from '../../../redux/profileItemsReducer'
 import SideBarRightFriends from './SidebarRightFriends'
 import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
 import { UserType } from '../../../types/types'
@@ -12,12 +12,13 @@ type MapStatePropsType = {
     posts: Array<UserType>,
     totalUsersCount: number,
     isFollowing: Array<number>,
+    filter: FilterType
 }
 
 type MapDispatchPropsType = {
     follow: (userId: number) => void,
     unfollow: (userId: number) => void,
-    getUsers: (currentPage: number, pageSize: number) => void,
+    getUsers: (currentPage: number, pageSize: number, filter: FilterType) => void,
 }
 
 type PropsType = MapStatePropsType & MapDispatchPropsType
@@ -25,11 +26,18 @@ type PropsType = MapStatePropsType & MapDispatchPropsType
 class SideBarRightFriendsContainer extends React.Component<PropsType>{
 
     componentDidMount(){
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize, filter} = this.props
+        this.props.getUsers(currentPage, pageSize, filter)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        const {pageSize, filter} = this.props
+        this.props.getUsers(pageNumber, pageSize, filter)
+    }
+
+    onFilterChanged = (filter: FilterType) => {
+        const {pageSize} = this.props
+        this.props.getUsers(1, pageSize, filter)
     }
 
     render(){
@@ -42,6 +50,7 @@ class SideBarRightFriendsContainer extends React.Component<PropsType>{
                                  follow={this.props.follow}
                                  unfollow={this.props.unfollow}
                                  onPageChanged={this.onPageChanged}
+                                 onFilterChanged={this.onFilterChanged}
                                  isFollowing={this.props.isFollowing}
                                  />
             </>
@@ -55,7 +64,8 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         pageSize: state.profileItems.pageSize,
         totalUsersCount: state.profileItems.totalUsersCount,
         currentPage: state.profileItems.currentPage,
-        isFollowing: state.profileItems.isFollowing
+        isFollowing: state.profileItems.isFollowing,
+        filter: state.profileItems.filter
     }
 }
 
