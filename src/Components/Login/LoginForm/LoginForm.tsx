@@ -6,22 +6,11 @@ import style from './LoginForm.module.scss'
 
 const LoginForm = (props: any) => {
 
-    type FormDataType = {
-        email: string,
-        password: string,
-        rememberMe: boolean,
-        captcha: string
-    }
-
-    const onSubmit = (formData: FormDataType) => {
-        props.loginUser(formData.email, formData.password, formData.rememberMe, formData.captcha)
-    }
-
     const Input = formControl('input')
 
     return(
         <>
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={props.onSubmit}>
             {({ handleSubmit, submitting, pristine }) => (
             <form onSubmit={handleSubmit} className={style.loginForm}>
                 <div className={style.emailInput}>

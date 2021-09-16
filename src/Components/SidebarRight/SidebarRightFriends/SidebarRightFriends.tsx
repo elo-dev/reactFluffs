@@ -1,32 +1,53 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Friends from './Friends'
 import Paginator from '../../common/Paginator/Paginator'
-import { UserType } from '../../../types/types'
-import { Field, Form, Formik } from 'formik'
-import { FilterType } from '../../../redux/profileItemsReducer'
+import { FilterType, getUsers } from '../../../redux/profileItemsReducer'
 import UsersSearchForm from './UsersSearchForm'
+import { useDispatch, useSelector } from 'react-redux'
+import { getCurrentPage, getFilter, getIsFollowing, getPageSize, getTotalUsersCount, getUsersSelector } from '../../../redux/usersSelector'
 
-type PropsType = {
-    totalUsersCount: number,
-    pageSize: number,
-    currentPage: number,
-    onPageChanged: (pageNumber: number) => void,
-    onFilterChanged: (filter: FilterType) => void
-    posts: Array<UserType>,
-    isFollowing: Array<number>,
-    follow: (userId: number) => void,
-    unfollow: (userId: number) => void
-}
+type PropsType = {}
 
-let SideBarRightFriends: React.FC<PropsType> = ({totalUsersCount, pageSize, currentPage, onPageChanged, posts, ...props}) => {
+export const SideBarRightFriends: React.FC<PropsType> = (props) => {
+
+    const posts = useSelector(getUsersSelector)
+    const totalUsersCount = useSelector(getTotalUsersCount)
+    const pageSize = useSelector(getPageSize)
+    const currentPage = useSelector(getCurrentPage)
+    const filter = useSelector(getFilter)
+    const isFollowing = useSelector(getIsFollowing)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getUsers(currentPage, pageSize, filter))
+    },[])
+
+    const onPageChanged = (pageNumber: number) => {
+        dispatch(getUsers(pageNumber, pageSize, filter))
+    }
+
+    const onFilterChanged = (filter: FilterType) => {
+        dispatch(getUsers(1, pageSize, filter))
+    }
+
+    const follow = (userId: number) => {
+        dispatch(follow(userId))
+    }
+
+    const unfollow = (userId: number) => {
+        dispatch(unfollow(userId))
+    }
+
     return(
         <div>
-            <UsersSearchForm onFilterChanged={props.onFilterChanged} />
-            {posts.map(f => <Friends  f={f}
-                                        isFollowing={props.isFollowing}
-                                        follow={props.follow}
-                                        unfollow={props.unfollow}
-                                        />)}
+            <UsersSearchForm onFilterChanged={onFilterChanged} />
+            {posts.map(f => <Friends key={f.id} 
+                                     friend={f}
+                                     isFollowing={isFollowing}
+                                     follow={follow}
+                                     unfollow={unfollow}
+                                    />)}
             <Paginator  totalUsersCount={totalUsersCount}
                         pageSize={pageSize}
                         currentPage={currentPage}
@@ -35,5 +56,3 @@ let SideBarRightFriends: React.FC<PropsType> = ({totalUsersCount, pageSize, curr
         </div>
     )
 }
-
-export default SideBarRightFriends

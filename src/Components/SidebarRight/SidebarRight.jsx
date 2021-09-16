@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './SidebarRight.module.scss'
-import SideBarRightFriendsContainer from '../SidebarRight/SidebarRightFriends/SidebarRightFriendsContainer'
+import { SideBarRightFriendsContainer } from '../SidebarRight/SidebarRightFriends/SidebarRightFriendsContainer'
 
 const SidebarRight = (props) => {
 

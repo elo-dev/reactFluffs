@@ -13,10 +13,10 @@ import { initializeApp } from './redux/appReducer'
 import Preloader from './Components/common/Preloader/Preloader'
 import AccountSettingsContainer from './Components/AccountSettings/AccountSettingsContainer'
 import { AppStateType } from './redux/redux-store'
+import { LoginPage } from './Components/Login/Login'
 
 const ProfilePage = lazy(() => import('./Components/ProfileContent/ProfileContent'))
 const Stories = lazy(() => import('./Components/Stories/Stories'))
-const LoginPage = lazy(() => import('./Components/Login/Login'))
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
 type MapDispatchPropsType = {
